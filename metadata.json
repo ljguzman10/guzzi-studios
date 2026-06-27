@@ -1,0 +1,6 @@
+{
+  "name": "Guzzi Photography",
+  "description": "Premium wedding, event, and artist photography service by Luis Guzman based in Chicago, Illinois.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
