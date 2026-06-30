@@ -24,7 +24,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
   ];
 
   return (
-    <div id="about-page" className="pt-24 min-h-screen bg-[#0C0C0C] text-white font-sans border-b border-white/10 relative overflow-hidden">
+    <div id="about-page" className="pt-12 md:pt-16 min-h-screen bg-[#0C0C0C] text-white font-sans border-b border-white/10 relative overflow-hidden">
       
       {/* Moody ambient background glows */}
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/30 to-[#0C0C0C] pointer-events-none z-0" />
@@ -68,11 +68,16 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </div>
 
       {/* Big Editorial Profile Intro */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-10 pb-16 md:pt-14 md:pb-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 items-start">
           
           {/* Column 1: Luis's Professional Portraits & Frame (5 columns) */}
-          <div className="lg:col-span-5 space-y-6 relative">
+          <div className="lg:col-span-5 space-y-6 relative lg:self-center">
+            <div id="artist-behind-guzzi-text" className="space-y-1">
+              <span className="text-[9px] tracking-[0.3em] font-mono text-white/40 uppercase block">DIRECTOR & PHOTOGRAPHER</span>
+              <h2 className="font-serif text-xl text-white tracking-wider uppercase font-light">The Artist Behind Guzzi</h2>
+            </div>
+
             <div className="relative z-10 border border-white/10 p-3 bg-[#111111] shadow-2xl">
               <div className="aspect-[4/5] bg-zinc-900 overflow-hidden rounded-sm relative">
                 <img
@@ -97,16 +102,6 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
               </a>
             </div>
 
-            {/* Behind the scenes overlay context info */}
-            <div className="border border-white/10 bg-[#111111]/40 p-6 space-y-3 shadow-md rounded-sm">
-              <div className="flex items-center space-x-2.5 text-white/70">
-                <Camera className="w-4 h-4 text-white/50" />
-                <span className="text-[10px] tracking-widest font-mono uppercase font-bold text-white/80">Studio Gear List</span>
-              </div>
-              <p className="text-[11px] text-white/60 leading-relaxed font-light">
-                Primarily shooting with dual Sony A7R V bodies paired with prime G-Master lenses (35mm f/1.4, 50mm f/1.2, 85mm f/1.4) to capture organic, high-contrast, beautiful depth-of-field frames. Fully backed up in real-time onto secure dual memory slots.
-              </p>
-            </div>
 
             {/* Decorative Grid accent */}
             <div className="absolute -top-6 -left-6 w-full h-full border border-white/5 pointer-events-none rounded-sm hidden sm:block" />

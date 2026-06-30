@@ -111,12 +111,12 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
             />
           </svg>
 
-          <div className="flex flex-col">
-            <span className="text-2xl font-light tracking-[0.2em] uppercase leading-none text-white group-hover:text-white/80 transition-colors">
+          <div className="flex flex-col items-center">
+            <span className="text-2xl font-light tracking-[0.2em] uppercase leading-none text-white group-hover:text-white/80 transition-colors pl-[0.2em]">
               Guzzi
             </span>
-            <span className="text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white/75 transition-colors font-sans mt-1">
-              Photography
+            <span className="text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white/75 transition-colors font-sans mt-1 pl-[0.4em]">
+              Studios
             </span>
           </div>
         </button>

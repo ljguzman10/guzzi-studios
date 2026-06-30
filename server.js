@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import session from "express-session";
 import dotenv from "dotenv";
 import fs from "fs";
+import { createServer as createViteServer } from "vite";
 
 // Load environment variables from .env
 dotenv.config();
@@ -183,19 +184,28 @@ async function startServer() {
     res.redirect('/?admin=true');
   });
 
-  // --- STATIC ASSETS FOR PRODUCTION ---
-  // Safely fallback to serving compiled UI assets or static routes without invoking Vite engine
-  const distPath = path.join(__dirname, 'dist');
-  app.use(express.static(distPath));
-  
-  // Handle root frontend catch-all safely
-  app.get('*', (req, res) => {
-    if (fs.existsSync(path.join(distPath, 'index.html'))) {
-      res.sendFile(path.join(distPath, 'index.html'));
-    } else {
-      res.status(200).send("Guzzi Studios API Node running cleanly.");
-    }
-  });
+  // --- STATIC ASSETS & VITE DEV SERVER MIDDLEWARE ---
+  if (process.env.NODE_ENV !== "production") {
+    // Mount Vite dev server in middleware mode for hot reloading/frontend assets in development
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    // Serve production static assets from dist folder
+    const distPath = path.join(__dirname, 'dist');
+    app.use(express.static(distPath));
+    
+    // Handle root frontend catch-all safely
+    app.get('*', (req, res) => {
+      if (fs.existsSync(path.join(distPath, 'index.html'))) {
+        res.sendFile(path.join(distPath, 'index.html'));
+      } else {
+        res.status(200).send("Guzzi Studios API Node running cleanly.");
+      }
+    });
+  }
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`[GUZZI STUDIOS] Server initialized on port ${PORT}`);

@@ -142,7 +142,7 @@ export default function App() {
     }
   }, [refreshTrigger, adminOpen]);
 
-  // Check session if admin parameter is present in URL or we have a saved token
+  // Check session if admin parameter is present in URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tokenFromQuery = params.get('token');
@@ -152,7 +152,7 @@ export default function App() {
 
     const activeToken = tokenFromQuery || localStorage.getItem('admin_token');
     
-    if (params.get('admin') === 'true' || activeToken) {
+    if (params.get('admin') === 'true') {
       const fetchUrl = activeToken ? `/api/admin/session?token=${encodeURIComponent(activeToken)}` : '/api/admin/session';
       const headers: Record<string, string> = {};
       if (activeToken) {
@@ -167,17 +167,17 @@ export default function App() {
             // Clean URL query param
             window.history.replaceState({}, document.title, window.location.pathname);
           } else {
-            // If verification fails and they explicitly requested admin, redirect
-            if (params.get('admin') === 'true') {
-              window.location.href = '/login';
-            }
+            localStorage.removeItem('admin_token');
+            window.location.href = '/login';
           }
         })
         .catch(() => {
-          if (params.get('admin') === 'true') {
-            window.location.href = '/login';
-          }
+          localStorage.removeItem('admin_token');
+          window.location.href = '/login';
         });
+    } else {
+      // Clear admin token on launch if not explicitly opening the admin panel
+      localStorage.removeItem('admin_token');
     }
   }, []);
 
@@ -192,25 +192,9 @@ export default function App() {
   };
 
   const handleOpenAdmin = () => {
-    const activeToken = localStorage.getItem('admin_token');
-    const fetchUrl = activeToken ? `/api/admin/session?token=${encodeURIComponent(activeToken)}` : '/api/admin/session';
-    const headers: Record<string, string> = {};
-    if (activeToken) {
-      headers['Authorization'] = `Bearer ${activeToken}`;
-    }
-
-    fetch(fetchUrl, { headers })
-      .then(res => res.json())
-      .then(data => {
-        if (data.isAdmin) {
-          setAdminOpen(true);
-        } else {
-          window.location.href = '/login';
-        }
-      })
-      .catch(() => {
-        window.location.href = '/login';
-      });
+    // Clear token and redirect to login screen for fully locked behavior
+    localStorage.removeItem('admin_token');
+    window.location.href = '/login';
   };
 
   return (

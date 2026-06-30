@@ -19,7 +19,7 @@ export default function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               Guzzi
             </span>
             <span className="text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white/75 transition-colors font-sans mt-1">
-              Photography
+              Studios
             </span>
           </div>
           
@@ -73,14 +73,17 @@ export default function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone className="w-4 h-4 text-white/40 flex-shrink-0" />
-                <span>(773) 577-7372</span>
+                <a
+                  href="tel:7735777372"
+                  className="hover:text-white transition-colors cursor-pointer underline decoration-white/10 hover:decoration-white"
+                >
+                  (773) 577-7372
+                </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail className="w-4 h-4 text-white/40 flex-shrink-0" />
                 <a 
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  href="mailto:guzzistudios.luis@gmail.com" 
                   className="hover:text-white transition-colors cursor-pointer underline decoration-white/10 hover:decoration-white"
                 >
                   guzzistudios.luis@gmail.com

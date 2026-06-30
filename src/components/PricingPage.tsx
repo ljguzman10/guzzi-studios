@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Check, Sparkles, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle } from 'lucide-react';
 import chicagoCouple from '../assets/images/chicago_couple_1782429073568.jpg';
+import chicagoGala from '../assets/images/chicago_gala_highrise_1782762966469.jpg';
+import djFullDeck from '../assets/images/dj_pioneer_full_deck_1782756851160.jpg';
 
 interface PricingPageProps {
   onNavigate: (view: string) => void;
@@ -8,6 +10,12 @@ interface PricingPageProps {
 
 export default function PricingPage({ onNavigate }: PricingPageProps) {
   const [activeTab, setActiveTab] = useState<'weddings' | 'events' | 'djs-artists'>('weddings');
+
+  const tabImages = {
+    weddings: chicagoCouple,
+    events: chicagoGala,
+    'djs-artists': djFullDeck,
+  };
 
   const pricingTabs = [
     { id: 'weddings', label: 'Weddings', subtitle: 'Fine Art & Editorial' },
@@ -166,9 +174,9 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       {/* Editorial Header Hero Banner */}
       <div className="relative h-[40vh] min-h-[300px] flex items-center justify-center bg-white overflow-hidden border-b border-white/10">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-90 scale-105"
+          className="absolute inset-0 bg-cover bg-center opacity-90 scale-105 transition-all duration-700 ease-in-out"
           style={{
-            backgroundImage: `url(${chicagoCouple})`,
+            backgroundImage: `url(${tabImages[activeTab]})`,
           }}
         />
         <div className="absolute inset-0 bg-black/25" />

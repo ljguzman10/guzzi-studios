@@ -10,31 +10,32 @@ interface WeddingsPageProps {
 export default function WeddingsPage({ onNavigate }: WeddingsPageProps) {
   const [weddingItems, setWeddingItems] = useState<PortfolioItem[]>([]);
 
-  useEffect(() => {
+useEffect(() => {
     const stored = localStorage.getItem('guzzi_portfolio');
     if (stored) {
       const parsed = JSON.parse(stored) as PortfolioItem[];
       const updated = parsed.map(item => {
         if (item.id === 'w1') {
-          return { ...item, title: 'Cantigny Park', location: 'Wheaton, IL', subtitle: 'Beth & Trevor', image: '/src/assets/images/regenerated_image_1782436761072.jpg', tags: ['EditorialLove', 'LuxeFlora', 'Historic'] };
+          return { ...item, title: 'Cantigny Park', location: 'Wheaton, IL', subtitle: 'Beth & Trevor', image: new URL('../assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href, tags: ['EditorialLove', 'LuxeFlora', 'Historic'] };
         }
         if (item.id === 'w2') {
-          return { ...item, title: 'Estate Wedding', location: 'Chicago, IL', subtitle: 'Tessa & Douglas', image: '/src/assets/images/regenerated_image_1782504926122.jpg', year: '2024' };
+          return { ...item, title: 'Estate Wedding', location: 'Chicago, IL', subtitle: 'Tessa & Douglas', image: new URL('../assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href, year: '2024' };
         }
         if (item.id === 'w3') {
-          return { ...item, title: 'Navy Pier', location: 'Chicago, IL', subtitle: 'Steven & Steven', image: '/src/assets/images/regenerated_image_1782511010199.jpg', year: '2025' };
+          return { ...item, title: 'Navy Pier', location: 'Chicago, IL', subtitle: 'Steven & Steven', image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href, year: '2025' };
         }
         if (item.id === 'w4') {
-          return { ...item, title: 'Magnificent Mile Engagement Party', subtitle: 'Makaela & Diego', image: '/src/assets/images/regenerated_image_1782516236476.jpg' };
+          return { ...item, title: 'Magnificent Mile Engagement Party', subtitle: 'Makaela & Diego', image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href };
         }
         if (item.id === 'w5') {
-          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: '/src/assets/images/regenerated_image_1782523040836.jpg' };
+          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href };
         }
         if (item.id === 'w6') {
-          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: '/src/assets/images/regenerated_image_1782519856684.jpg', location: 'Chicago, IL', year: '2024' };
+          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024' };
         }
         return item;
       });
+      
       // Swap positions of w4 and w6 to respect layout changes requested by user (ensure w6 is before w4)
       const w4Idx = updated.findIndex(item => item.id === 'w4');
       const w6Idx = updated.findIndex(item => item.id === 'w6');

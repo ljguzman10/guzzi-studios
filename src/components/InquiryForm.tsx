@@ -22,14 +22,13 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
-  const [lastGmailUrl, setLastGmailUrl] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
@@ -42,7 +41,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
     }
 
     // Process Submission
-    setTimeout(() => {
+    setTimeout(async () => {
       const newInquiry: Inquiry = {
         id: 'inq_' + Math.random().toString(36).substr(2, 9),
         name: formData.name,
@@ -58,7 +57,33 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
       };
 
       try {
-        // Fetch existing from localStorage
+        // Asynchronous background fetch request to Web3Forms
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            access_key: "dad70d2f-c9c2-4476-98fb-5bfdb84678ce",
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            date: formData.date,
+            type: formData.type,
+            venue: formData.venue,
+            budget: formData.budget,
+            message: formData.message
+          })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+          throw new Error('Web3Forms failed to process email dispatch.');
+        }
+
+        // Fetch existing from localStorage for CRM Sync
         const stored = localStorage.getItem('guzzi_inquiries');
         const list = stored ? JSON.parse(stored) : [];
         list.unshift(newInquiry);
@@ -69,27 +94,10 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
           onSuccessSubmit(newInquiry);
         }
 
-        // Construct Gmail redirection URL
-        const subject = `New Inquiry: ${newInquiry.name} - Guzzi Photography`;
-        const body = `Hello Luis,\n\nYou have received a new inquiry from your website. Here are the details:\n\n` +
-          `- Name: ${newInquiry.name}\n` +
-          `- Email: ${newInquiry.email}\n` +
-          `- Phone: ${newInquiry.phone || 'N/A'}\n` +
-          `- Date: ${newInquiry.date}\n` +
-          `- Type: ${newInquiry.type}\n` +
-          `- Venue: ${newInquiry.venue}\n` +
-          `- Budget: ${newInquiry.budget}\n\n` +
-          `Message:\n${newInquiry.message}\n\n` +
-          `---\nLogged in client database.`;
-
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        setLastGmailUrl(gmailUrl);
-
-        // Open the Gmail URL in a new tab/window to send it
-        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-
+        // Toggle success state directly
         setIsSuccess(true);
-        // Clear Form
+        
+        // Clear Form Fields
         setFormData({
           name: '',
           email: '',
@@ -101,8 +109,8 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
           message: ''
         });
       } catch (err) {
-        console.error('CRM local write error:', err);
-        setError('There was an issue processing your request. Please try again.');
+        console.error('Submission error:', err);
+        setError('There was an issue processing your request and sending the email. Please try again.');
       } finally {
         setIsSubmitting(false);
       }
@@ -143,19 +151,9 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
               </p>
             </div>
             <p className="text-white/60 text-sm font-sans font-light leading-relaxed max-w-md mx-auto">
-              Thank you for reaching out, your inquiry has been logged into our client database. Luis Guzman will personally review your timeline, check availability, and contact you via email or phone within 24 hours.
+              Thank you for reaching out, your inquiry has been logged into our client database and emailed over to us. Luis Guzman will personally review your timeline, check availability, and contact you via email or phone within 24 hours.
             </p>
             <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {lastGmailUrl && (
-                <a
-                  href={lastGmailUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-white text-[#0C0C0C] hover:bg-white/90 font-bold transition-all text-xs tracking-[0.2em] uppercase cursor-pointer font-sans inline-flex items-center gap-2"
-                >
-                  <span>Send via Gmail</span>
-                </a>
-              )}
               <button
                 onClick={() => setIsSuccess(false)}
                 className="px-6 py-3 border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all text-xs tracking-[0.2em] uppercase font-semibold cursor-pointer font-sans"
