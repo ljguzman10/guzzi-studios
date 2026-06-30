@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Check, Sparkles, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle } from 'lucide-react';
 import chicagoCouple from '../assets/images/chicago_couple_1782429073568.jpg';
-import chicagoGala from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
-import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
+import chicagoGala from '../assets/images/chicago_gala_highrise_1782762966469.jpg';
+import djFullDeck from '../assets/images/dj_pioneer_full_deck_1782756851160.jpg';
 
 interface PricingPageProps {
   onNavigate: (view: string) => void;
@@ -14,7 +14,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
   const tabImages = {
     weddings: chicagoCouple,
     events: chicagoGala,
-    'djs-artists': djCloseupHands,
+    'djs-artists': djFullDeck,
   };
 
   const pricingTabs = [

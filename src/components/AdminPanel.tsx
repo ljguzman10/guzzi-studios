@@ -103,60 +103,95 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
       });
   };
 
-  const loadDatabase = () => {
-    // 1. Inquiries
-    const storedInquiries = localStorage.getItem('guzzi_inquiries');
-    if (storedInquiries) {
-      setInquiries(JSON.parse(storedInquiries));
-    } else {
-      // Seed initial inquiries for CRM demonstration
-      const seeds: Inquiry[] = [
-        {
-          id: 'inq_seed1',
-          name: 'Isabella Rodriguez',
-          email: 'isabella.r@chicagoevents.org',
-          phone: '(312) 555-8921',
-          date: '2026-09-12',
-          type: 'wedding',
-          venue: 'The Peninsula Hotel, Chicago',
-          budget: '$8,000 - $12,000 (Luxury Full Day)',
-          message: 'Hi Luis! We absolutely love your raw editorial style. We are planning a black-tie autumn wedding with 180 guests. We would love a full day package with a secondary photographer.',
-          status: 'new',
-          createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-          notes: 'Reached out from Instagram. Sounds like a perfect fit for our brand vibe.'
-        },
-        {
-          id: 'inq_seed2',
-          name: 'DJ Soren (Magnus)',
-          email: 'magnus.beats@gmail.com',
-          phone: '(773) 555-0143',
-          date: '2026-07-31',
-          type: 'dj-artist',
-          venue: 'Spybar Chicago',
-          budget: '$3,000 - $5,000',
-          message: 'Yo Luis! Looking for high-octane backstage shots and main-deck coverage for my residency launch at Spybar. I saw your nightlife work at Radius and it is incredible. Let me know if you are open.',
-          status: 'contacted',
-          createdAt: new Date(Date.now() - 3600000 * 20).toISOString(),
-          notes: 'Texted him on WhatsApp. Scheduled call for Friday.'
-        },
-        {
-          id: 'inq_seed3',
-          name: 'Christian Dior Chicago PR',
-          email: 'chicago.pr@dior.corp',
-          phone: '(312) 555-4001',
-          date: '2026-08-15',
-          type: 'event',
-          venue: 'Oak Street Boutique, Gold Coast',
-          budget: '$5,000 - $8,000',
-          message: 'We are organizing an exclusive private evening trunk launch party. We need luxury editorial coverage of our guests, champagne toast, and products.',
-          status: 'booked',
-          createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
-          notes: 'Contract signed! Retainer received.'
+ const loadDatabase = () => {
+    // Safe parser function to prevent React from crashing if storage is empty/corrupted
+    const getSafeData = (key: string, fallbackSeeds: any[]) => {
+      try {
+        const stored = localStorage.getItem(key);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) return parsed;
         }
-      ];
-      localStorage.setItem('guzzi_inquiries', JSON.stringify(seeds));
-      setInquiries(seeds);
-    }
+      } catch (err) {
+        console.warn(`Storage issue with ${key}. Falling back to default data.`);
+      }
+      localStorage.setItem(key, JSON.stringify(fallbackSeeds));
+      return fallbackSeeds;
+    };
+
+    // 1. Inquiries
+    const inquirySeeds: Inquiry[] = [
+      {
+        id: 'inq_seed1',
+        name: 'Isabella Rodriguez',
+        email: 'isabella.r@chicagoevents.org',
+        phone: '(312) 555-8921',
+        date: '2026-09-12',
+        type: 'wedding',
+        venue: 'The Peninsula Hotel, Chicago',
+        budget: '$8,000 - $12,000 (Luxury Full Day)',
+        message: 'Hi Luis! We absolutely love your raw editorial style. We are planning a black-tie autumn wedding with 180 guests. We would love a full day package with a secondary photographer.',
+        status: 'new',
+        createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+        notes: 'Reached out from Instagram. Sounds like a perfect fit for our brand vibe.'
+      },
+      {
+        id: 'inq_seed2',
+        name: 'DJ Soren (Magnus)',
+        email: 'magnus.beats@gmail.com',
+        phone: '(773) 555-0143',
+        date: '2026-07-31',
+        type: 'dj-artist',
+        venue: 'Spybar Chicago',
+        budget: '$3,000 - $5,000',
+        message: 'Yo Luis! Looking for high-octane backstage shots and main-deck coverage for my residency launch at Spybar. I saw your nightlife work at Radius and it is incredible. Let me know if you are open.',
+        status: 'contacted',
+        createdAt: new Date(Date.now() - 3600000 * 20).toISOString(),
+        notes: 'Texted him on WhatsApp. Scheduled call for Friday.'
+      },
+      {
+        id: 'inq_seed3',
+        name: 'Christian Dior Chicago PR',
+        email: 'chicago.pr@dior.corp',
+        phone: '(312) 555-4001',
+        date: '2026-08-15',
+        type: 'event',
+        venue: 'Oak Street Boutique, Gold Coast',
+        budget: '$5,000 - $8,000',
+        message: 'We are organizing an exclusive private evening trunk launch party. We need luxury editorial coverage of our guests, champagne toast, and products.',
+        status: 'booked',
+        createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
+        notes: 'Contract signed! Retainer received.'
+      }
+    ];
+    
+    setInquiries(getSafeData('guzzi_inquiries', inquirySeeds));
+
+    // 2. Portfolio CMS
+    setPortfolio(getSafeData('guzzi_portfolio', defaultPortfolioItems));
+
+    // 3. Blogs CMS
+    setBlogs(getSafeData('guzzi_blogs', defaultBlogPosts));
+
+    // 4. Team Applications
+    const appSeeds: TeamApplication[] = [
+      {
+        id: 'app_seed1',
+        name: 'Marcus Vance',
+        email: 'marcus.vance@creative.com',
+        phone: '(312) 555-0987',
+        role: 'second-photographer',
+        portfolio: 'https://marcusvance.myportfolio.com',
+        instagram: '@marcus_vance',
+        about: 'I have been shooting second camera for 3 years, passionate about candid moments and crisp black & white editorial frames. Would love to learn from Luis.',
+        gear: 'Sony A7 IV, 35mm f/1.4 GM, 85mm f/1.8',
+        status: 'new',
+        createdAt: new Date(Date.now() - 3600000 * 12).toISOString()
+      }
+    ];
+    
+    setApplications(getSafeData('guzzi_applications', appSeeds));
+  };
 
     // 2. Portfolio CMS
     const storedPortfolio = localStorage.getItem('guzzi_portfolio');
