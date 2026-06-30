@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import dotenv from "dotenv";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 
 // Load environment variables from .env
@@ -10,6 +11,47 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Serverless-safe fallback token verification helpers
+const TOKEN_DIR = path.join('/tmp', '.guzzi_auth');
+if (!fs.existsSync(TOKEN_DIR)) {
+  try { fs.mkdirSync(TOKEN_DIR, { recursive: true }); } catch (e) {}
+}
+
+function persistToken(token) {
+  try {
+    fs.writeFileSync(path.join(TOKEN_DIR, token), Date.now().toString());
+  } catch (e) {
+    console.error("Token persistence tracking error:", e);
+  }
+}
+
+function checkPersistedToken(token) {
+  if (!token) return false;
+  // Clean token to prevent directory traversal
+  const cleanToken = token.replace(/[^a-zA-Z0-9_\-]/g, '');
+  const tokenPath = path.join(TOKEN_DIR, cleanToken);
+  if (fs.existsSync(tokenPath)) {
+    try {
+      const timestamp = parseInt(fs.readFileSync(tokenPath, 'utf8'), 10);
+      // Ensure token isn't older than 4 hours
+      if (Date.now() - timestamp < 4 * 60 * 60 * 1000) {
+        return true;
+      }
+      fs.unlinkSync(tokenPath);
+    } catch (e) {}
+  }
+  return false;
+}
+
+function removePersistedToken(token) {
+  if (!token) return;
+  try {
+    const cleanToken = token.replace(/[^a-zA-Z0-9_\-]/g, '');
+    const tokenPath = path.join(TOKEN_DIR, cleanToken);
+    if (fs.existsSync(tokenPath)) fs.unlinkSync(tokenPath);
+  } catch (e) {}
+}
 
 async function startServer() {
   const app = express();
@@ -22,9 +64,6 @@ async function startServer() {
   const ADMIN_USER = process.env.ADMIN_USER || "luisg";
   const ADMIN_PASS = process.env.ADMIN_PASS || "guzzistu773";
   const SESSION_SECRET = process.env.SESSION_SECRET || "guzzi-studios-secure-session-secret-key-2026";
-
-  // Memory store for active admin tokens to bypass blocked cross-site session cookies in iframes
-  const activeTokens = new Set();
 
   // 1. Session tracking middleware setup with support for cross-site iframe cookies
   app.use(session({
@@ -57,7 +96,7 @@ async function startServer() {
 
     const token = tokenFromHeader || tokenFromXHeader || tokenFromQuery;
 
-    if (token && activeTokens.has(token)) {
+    if (token && checkPersistedToken(token)) {
       if (req.session) {
         req.session.isAdmin = true;
       }
@@ -87,7 +126,7 @@ async function startServer() {
     if (username === ADMIN_USER && password === ADMIN_PASS) {
       // Generate a session token
       const token = "guzzi_token_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
-      activeTokens.add(token);
+      persistToken(token);
 
       if (req.session) {
         req.session.isAdmin = true;
@@ -116,7 +155,7 @@ async function startServer() {
     // Clear token if passed
     const token = req.query.token || req.headers['x-admin-token'];
     if (token) {
-      activeTokens.delete(token);
+      removePersistedToken(token);
     }
     req.session.destroy((err) => {
       if (err) {
@@ -140,7 +179,7 @@ async function startServer() {
 
     const token = tokenFromHeader || tokenFromXHeader || tokenFromQuery;
 
-    if (token && activeTokens.has(token)) {
+    if (token && checkPersistedToken(token)) {
       if (req.session) {
         req.session.isAdmin = true;
       }
