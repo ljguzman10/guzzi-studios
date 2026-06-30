@@ -70,46 +70,12 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
           className="flex items-center space-x-3 group text-left cursor-pointer"
         >
           {/* Custom camera & G logo based on the provided image */}
-          <svg
-            viewBox="0 0 200 200"
-            className="w-10 h-10 text-white/95 group-hover:text-white group-hover:scale-105 transition-all duration-300"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* Camera Body */}
-            <path
-              d="M 84,44 L 116,44 M 84,44 L 72,62 L 38,62 A 10,10 0 0,0 28,72 L 28,132 A 10,10 0 0,0 38,142 L 72,142 M 116,44 L 128,62 L 162,62 A 10,10 0 0,1 172,72 L 172,132 A 10,10 0 0,1 162,142 L 148,142"
-              strokeWidth="5.5"
-            />
-            
-            {/* Outer Left Crescent Arc (Lens Reflection Accent) */}
-            <path
-              d="M 60,70 A 50,50 0 0,0 60,130"
-              strokeWidth="4"
-            />
-
-            {/* Main Lens Circle */}
-            <circle
-              cx="100"
-              cy="100"
-              r="34"
-              strokeWidth="5.5"
-            />
-
-            {/* Inner Stylized G Curve */}
-            <path
-              d="M 116,88 A 20,20 0 1,0 116,112"
-              strokeWidth="5.5"
-            />
-
-            {/* Inner Stylized G Horizontal Bar */}
-            <path
-              d="M 118,100 L 100,100"
-              strokeWidth="5.5"
-            />
-          </svg>
+          <img
+            src="/logo.png"
+            alt="Guzzi Studios"
+            className="w-10 h-10 object-contain group-hover:scale-105 transition-all duration-300 rounded-full bg-black"
+            referrerPolicy="no-referrer"
+          />
 
           <div className="flex flex-col items-center">
             <span className="text-2xl font-light tracking-[0.2em] uppercase leading-none text-white group-hover:text-white/80 transition-colors pl-[0.2em]">

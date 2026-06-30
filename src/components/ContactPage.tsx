@@ -60,10 +60,8 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding', 
       <div className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Contact Sidebar & FAQs (5 columns) */}
-          <div className="lg:col-span-5 space-y-12 lg:pt-10">
-            
-            {/* Quick Contact Info Cards */}
+          {/* Quick Contact Info Cards */}
+          <div className="lg:col-span-5 order-1 lg:pt-10">
             <div className="bg-[#111111]/40 border border-white/10 p-8 shadow-2xl rounded-sm space-y-6">
               <h3 className="font-serif text-xl font-light tracking-wide text-white">
                 Chicago Photography Studio
@@ -105,55 +103,54 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding', 
                 <span>Response Time: Under 24 Hours</span>
               </div>
             </div>
-
-            {/* Collapsible FAQ Section */}
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2 text-white/50">
-                  <HelpCircle className="w-4 h-4 text-white/30" />
-                  <span className="text-[10px] tracking-widest font-mono uppercase font-bold text-white/60">Frequently Asked Questions</span>
-                </div>
-                <h3 className="font-serif text-2xl tracking-tight text-white font-light">
-                  Client Inquiries FAQ
-                </h3>
-              </div>
-
-              <div className="divide-y divide-white/10 border-y border-white/10">
-                {faqs.map((faq, idx) => {
-                  const isOpen = openFaq === idx;
-                  return (
-                    <div key={idx} className="py-4">
-                      <button
-                        type="button"
-                        onClick={() => setOpenFaq(isOpen ? null : idx)}
-                        className="w-full flex items-center justify-between text-left focus:outline-none py-1 group cursor-pointer"
-                      >
-                        <span className="font-sans text-xs md:text-sm font-medium text-white/80 group-hover:text-white transition-colors">
-                          {faq.q}
-                        </span>
-                        {isOpen ? (
-                          <ChevronUp className="w-4 h-4 text-white/60 flex-shrink-0" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 text-white/30 flex-shrink-0" />
-                        )}
-                      </button>
-
-                      {isOpen && (
-                        <p className="mt-3 text-xs md:text-sm text-white/60 font-sans font-light leading-relaxed animate-fade-in pl-3 border-l border-white/20 py-1">
-                          {faq.a}
-                        </p>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column: CRM Inquiry Form (7 columns) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 order-2 lg:row-span-2">
             <InquiryForm onSuccessSubmit={onSuccessSubmit} defaultType={defaultType} />
+          </div>
+
+          {/* Collapsible FAQ Section */}
+          <div className="lg:col-span-5 order-3 space-y-6 lg:mt-6">
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 text-white/50">
+                <HelpCircle className="w-4 h-4 text-white/30" />
+                <span className="text-[10px] tracking-widest font-mono uppercase font-bold text-white/60">Frequently Asked Questions</span>
+              </div>
+              <h3 className="font-serif text-2xl tracking-tight text-white font-light">
+                Client Inquiries FAQ
+              </h3>
+            </div>
+
+            <div className="divide-y divide-white/10 border-y border-white/10">
+              {faqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div key={idx} className="py-4">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      className="w-full flex items-center justify-between text-left focus:outline-none py-1 group cursor-pointer"
+                    >
+                      <span className="font-sans text-xs md:text-sm font-medium text-white/80 group-hover:text-white transition-colors">
+                        {faq.q}
+                      </span>
+                      {isOpen ? (
+                        <ChevronUp className="w-4 h-4 text-white/60 flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4 text-white/30 flex-shrink-0" />
+                      )}
+                    </button>
+
+                    {isOpen && (
+                      <p className="mt-3 text-xs md:text-sm text-white/60 font-sans font-light leading-relaxed animate-fade-in pl-3 border-l border-white/20 py-1">
+                        {faq.a}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
         </div>
