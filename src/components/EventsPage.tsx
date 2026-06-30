@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { PortfolioItem } from '../types';
 import { portfolioItems as defaultPortfolioItems } from '../data';
 import { MapPin, Building } from 'lucide-react';
+import chicagoGalaLounge from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
 
 interface EventsPageProps {
   onNavigate: (view: string) => void;
@@ -21,13 +22,16 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
     }
     const updated = items.map(item => {
       if (item.id === 'e1') {
-        return { ...item, title: 'Penthouse NYE Party' };
+        return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural'] };
       }
       if (item.id === 'e2') {
-        return { ...item, title: 'Quinceañera' };
+        return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle'] };
       }
       if (item.id === 'e3') {
-        return { ...item, title: 'DNC Afterparty' };
+        return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', badge: 'HEADLINER: @FOURCOLORZACK', badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD'], tags: ['PoliticalParty', 'Gala', 'MidnightChicago'] };
+      }
+      if (item.id === 'e4') {
+        return { ...item, title: 'Regency Inn Banquets', subtitle: "Paola's 70th Birthday Party", tags: ['Celebration', '70AndGolden', 'Atmosphere'] };
       }
       return item;
     });
@@ -42,7 +46,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30 scale-105"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1600')`,
+            backgroundImage: `url(${chicagoGalaLounge})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-[#0C0C0C]" />
@@ -52,7 +56,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
             Guzzi Corporate & Private
           </span>
           <h1 className="font-serif text-4xl md:text-6xl text-white tracking-tight font-light">
-            Events & Society Galas
+            Events
           </h1>
           <div className="h-[1px] w-12 bg-white/20 mx-auto mt-4"></div>
           <p className="text-white/60 text-[10px] md:text-xs tracking-widest font-mono uppercase">
@@ -99,8 +103,25 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors" />
                   <div className="absolute top-4 left-4 bg-black/85 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
                     Event File
+                  </div>
+                  <div className="absolute bottom-3 left-3 flex flex-col gap-1 items-start">
+                    {item.badges && item.badges.length > 0 ? (
+                      item.badges.map((b, bIdx) => (
+                        <div
+                          key={bIdx}
+                          className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase"
+                        >
+                          {b}
+                        </div>
+                      ))
+                    ) : item.badge ? (
+                      <div className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
+                        {item.badge}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 
@@ -110,7 +131,6 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
                       <MapPin className="w-3 h-3 mr-1 text-white/40" />
                       {item.location}
                     </span>
-                    <span>{item.year || '2025'}</span>
                   </div>
 
                   <h3 className="font-serif text-xl md:text-2xl text-white font-light tracking-wide group-hover:text-white/80 transition-colors">

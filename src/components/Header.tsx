@@ -23,6 +23,18 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll on mobile when the mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'weddings', label: 'Weddings' },
@@ -43,8 +55,10 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
     <header
       id="site-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled || currentView !== 'home'
-          ? 'bg-[#0C0C0C]/95 text-white py-4 shadow-2xl backdrop-blur-md border-b border-white/10'
+        mobileMenuOpen
+          ? 'bg-black text-white py-4 border-b border-white/10'
+          : isScrolled || currentView !== 'home'
+          ? 'bg-[#0C0C0C] text-white py-4 shadow-2xl backdrop-blur-md border-b border-white/10'
           : 'bg-transparent text-white py-6 border-b border-white/5'
       }`}
     >
@@ -153,7 +167,7 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
       {mobileMenuOpen && (
         <div
           id="mobile-menu-backdrop"
-          className="fixed inset-0 top-[72px] bg-[#0C0C0C]/98 z-40 flex flex-col justify-between py-12 px-8 lg:hidden animate-fade-in"
+          className="fixed inset-0 top-[68px] bg-black z-40 flex flex-col justify-between py-12 px-8 lg:hidden animate-fade-in"
         >
           <nav className="flex flex-col space-y-6 text-center">
             {navItems.map((item) => {
@@ -165,9 +179,9 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
                   onClick={() => handleNavClick(item.id)}
                   className={`text-base uppercase tracking-[0.25em] block py-2 ${
                     isPricing
-                      ? 'text-gold-200 font-semibold bg-gold-200/5 border border-gold-200/25 py-2.5 rounded-sm mx-auto w-full max-w-xs shadow-[0_0_12px_rgba(229,222,179,0.1)]'
+                      ? 'text-gold-200 font-semibold bg-[#0C0C0C] border border-gold-200/25 py-2.5 rounded-sm mx-auto w-full max-w-xs shadow-[0_0_12px_rgba(229,222,179,0.1)]'
                       : isContact
-                      ? 'text-white font-semibold bg-white/5 border border-white/20 py-2.5 rounded-sm mx-auto w-full max-w-xs shadow-[0_0_12px_rgba(255,255,255,0.05)]'
+                      ? 'text-white font-semibold bg-[#0C0C0C] border border-white/20 py-2.5 rounded-sm mx-auto w-full max-w-xs shadow-[0_0_12px_rgba(255,255,255,0.05)]'
                       : currentView === item.id
                       ? 'text-white font-bold border-b border-white/10'
                       : 'text-white/60 border-b border-white/10'

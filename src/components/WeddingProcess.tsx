@@ -49,8 +49,8 @@ export default function WeddingProcess({ onNavigate }: WeddingProcessProps) {
       icon: Palette
     },
     {
-      name: "Commercial & Aerial",
-      description: "Drone photography for commercial building properties.",
+      name: "Real Estate",
+      description: "Bespoke interior showcases, luxury property walk-throughs, and high-contrast aerial drone views.",
       icon: Building
     },
     {

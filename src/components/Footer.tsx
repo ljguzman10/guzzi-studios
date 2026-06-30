@@ -77,7 +77,14 @@ export default function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail className="w-4 h-4 text-white/40 flex-shrink-0" />
-                <span>luis@guzziphotography.com</span>
+                <a 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-white transition-colors cursor-pointer underline decoration-white/10 hover:decoration-white"
+                >
+                  guzzistudios.luis@gmail.com
+                </a>
               </li>
             </ul>
           </div>
@@ -88,12 +95,12 @@ export default function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               <span>Instagram</span>
             </h4>
             <a 
-              href="https://instagram.com/GUZZI_PHOTO" 
+              href="https://instagram.com/GUZZISTUDIOS" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="inline-flex items-center space-x-2 text-xs text-white/75 hover:text-white transition-colors group cursor-pointer"
             >
-              <span className="font-mono tracking-wider text-white">@GUZZI_PHOTO</span>
+              <span className="font-mono tracking-wider text-white">@GUZZISTUDIOS</span>
               <span className="text-white/40 group-hover:translate-x-1 group-hover:text-white transition-all duration-300 font-mono">&rarr;</span>
             </a>
           </div>

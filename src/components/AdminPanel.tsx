@@ -13,7 +13,8 @@ import {
   Lock,
   Download,
   FolderOpen,
-  Briefcase
+  Briefcase,
+  LogOut
 } from 'lucide-react';
 
 interface AdminPanelProps {
@@ -28,6 +29,7 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [applications, setApplications] = useState<TeamApplication[]>([]);
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
+  const [adminData, setAdminData] = useState<{ administrator: string; systemTime: string; status: string; scopes: string[] } | null>(null);
 
   // Search & Filter state
   const [searchTerm, setSearchTerm] = useState('');
@@ -65,7 +67,41 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
   // Load database items on open
   useEffect(() => {
     loadDatabase();
+
+    // Securely fetch administrative session metadata from backend
+    const activeToken = localStorage.getItem('admin_token');
+    const headers: Record<string, string> = {};
+    if (activeToken) {
+      headers['Authorization'] = `Bearer ${activeToken}`;
+    }
+
+    fetch('/api/admin/data', { headers })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to retrieve secure session information');
+        return res.json();
+      })
+      .then(data => {
+        setAdminData(data);
+      })
+      .catch(err => {
+        console.error('[Admin API Error]', err);
+      });
   }, []);
+
+  const handleLogout = () => {
+    const activeToken = localStorage.getItem('admin_token');
+    const logoutUrl = activeToken ? `/logout?token=${encodeURIComponent(activeToken)}` : '/logout';
+    
+    fetch(logoutUrl)
+      .then(() => {
+        localStorage.removeItem('admin_token');
+        window.location.href = '/';
+      })
+      .catch(() => {
+        localStorage.removeItem('admin_token');
+        window.location.href = '/';
+      });
+  };
 
   const loadDatabase = () => {
     // 1. Inquiries
@@ -347,8 +383,13 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
               <Lock className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-serif text-xl md:text-2xl font-light tracking-wide text-white">
+              <h2 className="font-serif text-xl md:text-2xl font-light tracking-wide text-white flex items-center gap-2.5">
                 Guzzi Photography — Studio Admin
+                {adminData && (
+                  <span className="inline-flex items-center px-2 py-0.5 text-[8px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest">
+                    SECURE SESSION: {adminData.administrator}
+                  </span>
+                )}
               </h2>
               <p className="text-[10px] uppercase tracking-widest text-white/40 font-mono">
                 Bespoke CRM & Portfolio CMS Suite
@@ -411,6 +452,14 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
             >
               <Briefcase className="w-4 h-4" />
               <span>Applications ({applications.length})</span>
+            </button>
+            <div className="hidden md:block flex-grow" />
+            <button
+              onClick={handleLogout}
+              className="flex-grow md:flex-grow-0 flex items-center justify-center md:justify-start space-x-3 px-4 py-3 text-[10px] uppercase tracking-widest font-semibold rounded-sm transition-all cursor-pointer bg-red-600/15 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/20 font-mono"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Log Out</span>
             </button>
           </div>
 
@@ -797,13 +846,25 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
             {/* TAB 4: APPLICATIONS VIEWER */}
             {activeTab === 'applications' && (
               <div className="flex-grow flex flex-col h-full overflow-hidden space-y-4">
-                <div className="border-b border-white/10 pb-3">
-                  <h3 className="font-serif text-lg text-white font-light tracking-wide">
-                    Team Applications ({applications.length})
-                  </h3>
-                  <p className="text-white/50 text-[10px] font-sans font-light mt-1">
-                    Review incoming portfolios, handles, and role experience for Guzzi Photography.
-                  </p>
+                <div className="border-b border-white/10 pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                  <div>
+                    <h3 className="font-serif text-lg text-white font-light tracking-wide">
+                      Team Applications ({applications.length})
+                    </h3>
+                    <p className="text-white/50 text-[10px] font-sans font-light mt-1">
+                      Review incoming portfolios, handles, and role experience for Guzzi Photography.
+                    </p>
+                  </div>
+                  {adminData && (
+                    <div className="text-left sm:text-right flex flex-row sm:flex-col gap-2 sm:gap-1 items-center sm:items-end">
+                      <span className="inline-block text-[8px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20 uppercase tracking-widest rounded-sm">
+                        API STATUS: {adminData.status.toUpperCase()}
+                      </span>
+                      <span className="inline-block text-[8px] font-mono text-white/40 uppercase tracking-wider">
+                        SCOPES: {adminData.scopes.join(', ')}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-hidden">
@@ -1082,13 +1143,22 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
         </div>
 
         {/* Action Panel Footer */}
-        <div className="bg-[#111111] p-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-white/40">
-          <p className="font-mono">
-            Secure browser session. Changes apply instantly using high-fidelity local state engines.
-          </p>
-          <p className="font-mono">
-            GUZZI STUDIO CRM/CMS V1.2 • CHICAGOLAND
-          </p>
+        <div className="bg-[#111111] p-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-white/40">
+          <div className="space-y-1.5 text-center sm:text-left">
+            <p className="font-mono text-white/60">
+              Secure browser session. Changes apply instantly using high-fidelity local state engines.
+            </p>
+            <p className="font-mono">
+              GUZZI STUDIO CRM/CMS V1.2 • CHICAGOLAND
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="w-full sm:w-auto px-10 py-4 bg-red-600 hover:bg-red-700 active:scale-[0.98] text-white font-bold text-xs tracking-[0.25em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(220,38,38,0.35)] cursor-pointer font-sans inline-flex items-center justify-center gap-3 border border-red-500/20"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Log Out of Admin Portal</span>
+          </button>
         </div>
 
       </div>

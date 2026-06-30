@@ -83,50 +83,52 @@ const showcasePhotos = [
     category: 'events',
     title: 'Evening Luxury Cocktail Launch',
     subtitle: 'Quinceañera',
-    location: 'Gold Coast, Chicago',
+    location: 'LINCOLN PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
-    tags: ['Private Soiree', 'Fashion', 'Candid']
+    tags: ['TheGrandDebut', 'Fashion', 'SatinInTheSaddle']
   },
   {
     id: 'm8',
     category: 'djs-artists',
     title: 'DJ Deck Control',
     subtitle: 'Sound-Bar Chicago Headliner',
-    location: 'Chicago, IL',
+    location: 'RIVER NORTH, CHICAGO',
     image: 'https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
-    tags: ['Nightlife', 'High Energy', 'Stage Lighting']
+    tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever']
   },
   {
     id: 'm9',
     category: 'djs-artists',
-    title: 'Underground Techno Laser Show',
-    subtitle: 'The Mid Festival Set',
-    location: 'Chicago, IL',
+    title: 'Chop Shop',
+    subtitle: 'Industrial Foundations Met With Unyielding Frequencies',
+    location: 'WICKER PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
-    tags: ['Festival', 'Lasers', 'Cinematic']
+    tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit']
   },
   {
     id: 'm10',
     category: 'djs-artists',
-    title: 'Nightlife Bass Arena',
-    subtitle: 'Lollapalooza Chicago Afterparty',
-    location: 'Grant Park, Chicago',
+    title: 'PRYSM',
+    subtitle: 'Lollapalooza Aftershow',
+    location: 'LINCOLN PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&q=80&w=1200',
     year: '2024',
-    tags: ['Nightlife', 'Lasers', 'Crowd Shot']
+    tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura']
   },
   {
     id: 'm12',
     category: 'djs-artists',
     title: 'Redline Chicago',
-    subtitle: 'Deep House Afterhours Session',
-    location: 'Chicago, IL',
+    subtitle: 'Featuring Deep Underground Techno Afterhours Session',
+    location: 'WEST LOOP, CHICAGO',
     image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=1200',
-    year: '2025',
-    tags: ['Intimate Club', 'Deep House', 'Underground']
+    year: '2024',
+    tags: ['AfterHours', 'Underground', 'Lasers'],
+    badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA',
+    badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA']
   }
 ];
 

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
+import chicagoGalaLounge from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
 
 interface HeroProps {
   onNavigate: (view: string) => void;
@@ -61,7 +63,7 @@ export default function Hero({ onNavigate }: HeroProps) {
         <div className="grid grid-cols-3 border-t border-white/10 pt-8 mt-12 gap-4">
           <div>
             <p className="text-xl md:text-2xl font-light mb-1">200+</p>
-            <p className="text-[9px] md:text-[10px] tracking-widest uppercase text-white/40 font-mono">Weddings Shot</p>
+            <p className="text-[9px] md:text-[10px] tracking-widest uppercase text-white/40 font-mono">Celebrations</p>
           </div>
           <div>
             <p className="text-xl md:text-2xl font-light mb-1">5+ Years</p>
@@ -92,7 +94,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
           
-          <div className="absolute bottom-8 left-8 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
             <span className="text-[9px] tracking-[0.3em] uppercase text-white/50 block mb-1 font-mono">Editorial Portfolio</span>
             <h3 className="text-xl md:text-2xl font-light tracking-widest uppercase text-white group-hover:text-gold-200 transition-colors">Weddings</h3>
           </div>
@@ -108,11 +110,11 @@ export default function Hero({ onNavigate }: HeroProps) {
         >
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-30 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1200')` }}
+            style={{ backgroundImage: `url(${djCloseupHands})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
           
-          <div className="absolute bottom-8 left-8 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
             <span className="text-[9px] tracking-[0.3em] uppercase text-white/50 block mb-1 font-mono">Cinematic Coverage</span>
             <h3 className="text-xl md:text-2xl font-light tracking-widest uppercase text-white group-hover:text-gold-200 transition-colors">Music & DJs</h3>
           </div>
@@ -128,11 +130,11 @@ export default function Hero({ onNavigate }: HeroProps) {
         >
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-30 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200')` }}
+            style={{ backgroundImage: `url(${chicagoGalaLounge})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
           
-          <div className="absolute bottom-8 left-8 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
             <span className="text-[9px] tracking-[0.3em] uppercase text-white/50 block mb-1 font-mono">Atmospheric Galas</span>
             <h3 className="text-xl md:text-2xl font-light tracking-widest uppercase text-white group-hover:text-gold-200 transition-colors">Events</h3>
           </div>

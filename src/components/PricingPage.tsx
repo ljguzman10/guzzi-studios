@@ -18,7 +18,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
   const weddingPackages = [
     {
       name: "The Classic Collection",
-      price: "$1,200",
+      price: "$1,600",
       description: "60-Minute Creative Studio, Street Location Session or event set coverage.",
       features: [
         "6 Hours Continuous Coverage",
@@ -31,7 +31,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
     },
     {
       name: "The Editorial Heirloom",
-      price: "$2,000",
+      price: "$3,000",
       description: "Our signature collection. Expands coverage and adds an associate shooter to capture every angle with custom-designed print assets.",
       features: [
         "8 Hours Continuous Coverage",
@@ -251,10 +251,6 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
                     <span className="text-white/40 text-xs font-mono">USD</span>
                   </div>
                 </div>
-
-                <p className="text-xs text-white/60 leading-relaxed font-light min-h-[50px]">
-                  {pkg.description}
-                </p>
 
                 <div className="h-[1px] bg-white/10 w-full" />
 

@@ -64,33 +64,54 @@ export default function App() {
           return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: '/src/assets/images/regenerated_image_1782519856684.jpg', location: 'Chicago, IL', year: '2024' };
         }
         if (item.id === 'd1') {
-          return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day" };
+          return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'] };
+        }
+        if (item.id === 'd5') {
+          return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'] };
         }
         if (item.id === 'd3') {
-          return { ...item, title: 'Music Video BTS', badge: 'RAPPER: @BOOMANFOREVER' };
+          return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'] };
+        }
+        if (item.id === 'd4') {
+          return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'] };
+        }
+        if (item.id === 'd2') {
+          return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
         }
         if (item.id === 'd6') {
-          return { ...item, title: 'Redline Chicago' };
+          return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'] };
         }
         if (item.id === 'e1') {
-          return { ...item, title: 'Penthouse NYE Party' };
+          return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural'] };
         }
         if (item.id === 'e2') {
-          return { ...item, title: 'Quinceañera' };
+          return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle'] };
         }
         if (item.id === 'e3') {
-          return { ...item, title: 'DNC Afterparty' };
+          return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', tags: ['PoliticalParty', 'Gala', 'MidnightChicago'] };
+        }
+        if (item.id === 'e4') {
+          return { ...item, title: 'Regency Inn Banquets', subtitle: "Paola's 70th Birthday Party", tags: ['Celebration', '70AndGolden', 'Atmosphere'] };
         }
         return item;
       });
 
-      // Swap positions of d2 and d5 to respect layout changes requested by user (ensure d5 is before d2)
-      const d2Index = updated.findIndex(item => item.id === 'd2');
+      // Swap positions of d1 and d5 to respect layout changes requested by user (ensure d5 is before d1)
+      const d1Index = updated.findIndex(item => item.id === 'd1');
       const d5Index = updated.findIndex(item => item.id === 'd5');
-      if (d2Index !== -1 && d5Index !== -1 && d2Index < d5Index) {
-        const temp = updated[d2Index];
-        updated[d2Index] = updated[d5Index];
+      if (d1Index !== -1 && d5Index !== -1) {
+        const temp = updated[d1Index];
+        updated[d1Index] = updated[d5Index];
         updated[d5Index] = temp;
+      }
+
+      // Swap positions of d1 and d3 (the 2nd and 3rd elements in the current layout list)
+      const d1NewIndex = updated.findIndex(item => item.id === 'd1');
+      const d3Index = updated.findIndex(item => item.id === 'd3');
+      if (d1NewIndex !== -1 && d3Index !== -1) {
+        const temp = updated[d1NewIndex];
+        updated[d1NewIndex] = updated[d3Index];
+        updated[d3Index] = temp;
       }
 
       // Swap positions of w4 and w6 to respect layout changes requested by user (ensure w6 is before w4)
@@ -121,6 +142,45 @@ export default function App() {
     }
   }, [refreshTrigger, adminOpen]);
 
+  // Check session if admin parameter is present in URL or we have a saved token
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromQuery = params.get('token');
+    if (tokenFromQuery) {
+      localStorage.setItem('admin_token', tokenFromQuery);
+    }
+
+    const activeToken = tokenFromQuery || localStorage.getItem('admin_token');
+    
+    if (params.get('admin') === 'true' || activeToken) {
+      const fetchUrl = activeToken ? `/api/admin/session?token=${encodeURIComponent(activeToken)}` : '/api/admin/session';
+      const headers: Record<string, string> = {};
+      if (activeToken) {
+        headers['Authorization'] = `Bearer ${activeToken}`;
+      }
+
+      fetch(fetchUrl, { headers })
+        .then(res => res.json())
+        .then(data => {
+          if (data.isAdmin) {
+            setAdminOpen(true);
+            // Clean URL query param
+            window.history.replaceState({}, document.title, window.location.pathname);
+          } else {
+            // If verification fails and they explicitly requested admin, redirect
+            if (params.get('admin') === 'true') {
+              window.location.href = '/login';
+            }
+          }
+        })
+        .catch(() => {
+          if (params.get('admin') === 'true') {
+            window.location.href = '/login';
+          }
+        });
+    }
+  }, []);
+
   // Handle a refresh from Admin Panel CMS updates
   const handleRefreshData = () => {
     setRefreshTrigger(prev => prev + 1);
@@ -131,6 +191,28 @@ export default function App() {
     handleRefreshData();
   };
 
+  const handleOpenAdmin = () => {
+    const activeToken = localStorage.getItem('admin_token');
+    const fetchUrl = activeToken ? `/api/admin/session?token=${encodeURIComponent(activeToken)}` : '/api/admin/session';
+    const headers: Record<string, string> = {};
+    if (activeToken) {
+      headers['Authorization'] = `Bearer ${activeToken}`;
+    }
+
+    fetch(fetchUrl, { headers })
+      .then(res => res.json())
+      .then(data => {
+        if (data.isAdmin) {
+          setAdminOpen(true);
+        } else {
+          window.location.href = '/login';
+        }
+      })
+      .catch(() => {
+        window.location.href = '/login';
+      });
+  };
+
   return (
     <div className="min-h-screen bg-[#0C0C0C] text-white selection:bg-white/20 flex flex-col justify-between">
       
@@ -138,7 +220,7 @@ export default function App() {
       <Header
         currentView={currentView}
         onNavigate={(view) => setCurrentView(view)}
-        onOpenAdmin={() => setAdminOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* 2. MAIN ACTIVE VIEW ROUTER */}
@@ -185,7 +267,7 @@ export default function App() {
                 <p className="text-white/60 max-w-xl mx-auto text-xs md:text-sm font-sans font-light leading-relaxed">
                   Now booking weddings, premium society events, and artist promo diaries throughout Illinois, Wisconsin, Indiana, and destination locations worldwide.
                 </p>
-                <div className="pt-6">
+                <div className="pt-6 flex flex-col items-center gap-4">
                   <button
                     onClick={() => {
                       setCurrentView('contact');
@@ -194,6 +276,15 @@ export default function App() {
                     className="px-10 py-4 bg-white hover:bg-white/80 text-black font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-xl cursor-pointer rounded-sm"
                   >
                     Check Date Availability
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCurrentView('pricing');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="px-10 py-4 bg-gold-200 hover:bg-gold-100 text-[#0C0C0C] border border-gold-200 font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-[0_0_15px_rgba(229,222,179,0.25)] cursor-pointer rounded-sm"
+                  >
+                    CHECK OUR PRICES
                   </button>
                 </div>
               </div>
@@ -225,6 +316,7 @@ export default function App() {
           <ContactPage
             onSuccessSubmit={handleNewInquirySubmitted}
             defaultType="wedding"
+            onNavigate={(view) => setCurrentView(view)}
           />
         )}
 
@@ -237,7 +329,7 @@ export default function App() {
       {/* 3. CORE BRAND FOOTER */}
       <Footer
         onNavigate={(view) => setCurrentView(view)}
-        onOpenAdmin={() => setAdminOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* 4. ADMIN CMS / CRM INTERACTIVE CONTROL OVERLAY */}

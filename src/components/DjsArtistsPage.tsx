@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { PortfolioItem } from '../types';
 import { portfolioItems as defaultPortfolioItems } from '../data';
 import { MapPin, Radio } from 'lucide-react';
+import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
 
 interface DjsArtistsPageProps {
   onNavigate: (view: string) => void;
@@ -21,24 +22,42 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
     }
     const updated = items.map(item => {
       if (item.id === 'd1') {
-        return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day" };
+        return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'] };
+      }
+      if (item.id === 'd5') {
+        return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'] };
       }
       if (item.id === 'd3') {
-        return { ...item, title: 'Music Video BTS', badge: 'RAPPER: @BOOMANFOREVER' };
+        return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'] };
+      }
+      if (item.id === 'd4') {
+        return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'] };
+      }
+      if (item.id === 'd2') {
+        return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
       }
       if (item.id === 'd6') {
-        return { ...item, title: 'Redline Chicago' };
+        return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'] };
       }
       return item;
     });
 
-    // Swap positions of d2 and d5 to respect layout changes requested by user (ensure d5 is before d2)
-    const d2Idx = updated.findIndex(item => item.id === 'd2');
+    // Swap positions of d1 and d5 to respect layout changes requested by user (ensure d5 is before d1)
+    const d1Idx = updated.findIndex(item => item.id === 'd1');
     const d5Idx = updated.findIndex(item => item.id === 'd5');
-    if (d2Idx !== -1 && d5Idx !== -1 && d2Idx < d5Idx) {
-      const temp = updated[d2Idx];
-      updated[d2Idx] = updated[d5Idx];
+    if (d1Idx !== -1 && d5Idx !== -1) {
+      const temp = updated[d1Idx];
+      updated[d1Idx] = updated[d5Idx];
       updated[d5Idx] = temp;
+    }
+
+    // Swap positions of d1 and d3 (the 2nd and 3rd elements in the current layout list)
+    const d1NewIdx = updated.findIndex(item => item.id === 'd1');
+    const d3Idx = updated.findIndex(item => item.id === 'd3');
+    if (d1NewIdx !== -1 && d3Idx !== -1) {
+      const temp = updated[d1NewIdx];
+      updated[d1NewIdx] = updated[d3Idx];
+      updated[d3Idx] = temp;
     }
 
     setDjItems(updated);
@@ -51,16 +70,16 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
       <div className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden border-b border-white/10">
         {/* Gritty high-contrast dark image overlay background */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 scale-105"
+          className="absolute inset-0 bg-cover bg-center opacity-30 scale-105 grayscale"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1600')`,
+            backgroundImage: `url(${djCloseupHands})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-[#0C0C0C]" />
         
         <div className="relative z-10 text-center max-w-4xl px-6 space-y-4">
           <span className="text-white/50 text-[10px] tracking-[0.4em] uppercase font-semibold font-mono block animate-fade-in">
-            Guzzi Nightlife & Artist Profiles
+            GUZZI NIGHTLIFE
           </span>
           <h1 className="font-serif text-4xl md:text-7xl tracking-tight text-white leading-none font-light">
             Artists & DJs
@@ -110,8 +129,21 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors" />
-                  <div className="absolute bottom-3 left-3 bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
-                    {item.badge || 'Artist Doc'}
+                  <div className="absolute bottom-3 left-3 flex flex-col gap-1 items-start">
+                    {item.badges && item.badges.length > 0 ? (
+                      item.badges.map((b, bIdx) => (
+                        <div
+                          key={bIdx}
+                          className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase"
+                        >
+                          {b}
+                        </div>
+                      ))
+                    ) : (
+                      <div className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
+                        {item.badge || 'Artist Doc'}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -129,7 +161,7 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
                   </h3>
                   {item.subtitle && (
                     <p className="text-white/50 text-xs italic font-sans font-light">
-                      {item.id === 'd1' ? item.subtitle : `Featuring ${item.subtitle}`}
+                      {item.subtitle.startsWith('Featuring') || item.id === 'd1' || item.id === 'd3' || item.id === 'd5' || item.id === 'd4' ? item.subtitle : `Featuring ${item.subtitle}`}
                     </p>
                   )}
                 </div>

@@ -74,45 +74,47 @@ export const portfolioItems: PortfolioItem[] = [
     id: 'e1',
     category: 'events',
     title: 'Penthouse NYE Party',
-    subtitle: 'Faceted Light & Shadows',
+    subtitle: "Hosted by Social Hunt Club with Big Local DJ's",
     location: 'Chicago, IL',
     image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['Gala', 'Luxury Corporate', 'Cultural']
+    tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural']
   },
   {
     id: 'e2',
     category: 'events',
     title: 'Quinceañera',
-    subtitle: 'Evening Cocktail Launch',
-    location: 'Gold Coast, Chicago',
+    subtitle: "Where heritage meets the urban skyline",
+    location: 'LINCOLN PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['Private Soiree', 'Fashion', 'Candid']
+    tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle']
   },
   {
     id: 'e3',
     category: 'events',
-    title: 'DNC Afterparty',
-    subtitle: 'Dynamic Speakers & Panelists',
-    location: 'Chicago, IL',
+    title: 'Joes On Weed St.: DNC Party',
+    subtitle: 'Official Democratic National Committee After Party',
+    location: 'GOOSE ISLAND, CHICAGO',
     image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200',
     year: '2024',
     featured: false,
-    tags: ['Corporate Keynote', 'Modern', 'Press']
+    tags: ['PoliticalParty', 'Gala', 'MidnightChicago'],
+    badge: 'HEADLINER: @FOURCOLORZACK',
+    badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD']
   },
   {
     id: 'e4',
     category: 'events',
-    title: 'Navy Pier Anniversary Gala',
-    subtitle: 'Midnight Fireworks & Toast',
+    title: 'Regency Inn Banquets',
+    subtitle: "Paola's 70th Birthday Party",
     location: 'Chicago, IL',
     image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: false,
-    tags: ['Celebration', 'Flash Photography', 'Atmosphere']
+    tags: ['Celebration', '70AndGolden', 'Atmosphere']
   },
 
   // DJs & Artists
@@ -121,68 +123,77 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'djs-artists',
     title: 'Celest',
     subtitle: "International Woman's Day",
-    location: 'Chicago, IL',
+    location: 'RIVER NORTH, CHICAGO',
     image: 'https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['Nightlife', 'High Energy', 'Stage Lighting'],
+    tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'],
     badge: 'HEADLINER DJ: @NEIV.DJ'
   },
   {
     id: 'd5',
     category: 'djs-artists',
-    title: 'Lollapalooza Chicago Afterparty',
-    subtitle: 'High-Octane Deck Control',
-    location: 'Grant Park, Chicago',
+    title: 'PRYSM',
+    subtitle: 'Lollapalooza Aftershow',
+    location: 'LINCOLN PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&q=80&w=1200',
     year: '2024',
     featured: false,
-    tags: ['Nightlife', 'Lasers', 'Crowd Shot']
+    tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'],
+    badge: 'HEADLINER DJ: @FORESTERMUSIC',
+    badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ']
   },
   {
     id: 'd3',
     category: 'djs-artists',
-    title: 'Music Video BTS',
-    subtitle: 'In-Studio Profile: DJ Helix',
-    location: 'River North, Chicago',
+    title: 'Crash Site : Music Video BTS',
+    subtitle: "Hosted by the owners of Harold's Chicken",
+    location: 'CRETE, IL',
     image: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=1200',
     year: '2024',
     featured: false,
-    tags: ['Studio Portrait', 'Analog Gears', 'Urban'],
-    badge: 'RAPPER: @BOOMANFOREVER'
+    tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'],
+    badge: 'RAPPER: @BOOMANFOREVER',
+    badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip']
   },
   {
     id: 'd4',
     category: 'djs-artists',
-    title: 'Radius Chicago BTS',
-    subtitle: 'Backstage Vibe with Nora En Pure',
-    location: 'Chicago, IL',
+    title: 'Kashmir',
+    subtitle: 'Subversive rhythms wrapped in green onyx and velvet',
+    location: 'FULTON MARKET, CHICAGO',
     image: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: false,
-    tags: ['Behind The Scenes', 'Monochrome Accent', 'Artist']
+    tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'],
+    badge: 'HEADLINER: @GIANNIBLU',
+    badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ']
   },
   {
     id: 'd2',
     category: 'djs-artists',
-    title: 'The Mid Festival Set',
-    subtitle: 'Underground Techno Showcase',
-    location: 'Chicago, IL',
+    title: 'Chop Shop',
+    subtitle: 'Industrial Foundations Met With Unyielding Frequencies',
+    location: 'WICKER PARK, CHICAGO',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['Festival', 'Lasers', 'Cinematic']
+    tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'],
+    badge: 'HEADLINER: @TVVIN.OC',
+    badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ']
   },
   {
     id: 'd6',
     category: 'djs-artists',
     title: 'Redline Chicago',
-    subtitle: 'Deep House Afterhours Session',
-    location: 'River North, Chicago',
+    subtitle: 'Featuring Deep Underground Techno Afterhours Session',
+    location: 'WEST LOOP, CHICAGO',
     image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=1200',
-    year: '2025',
+    year: '2024',
     featured: false,
-    tags: ['Intimate Club', 'Deep House', 'Underground']
+    tags: ['AfterHours', 'Underground', 'Lasers'],
+    badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA',
+    badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA']
   }
 ];
 

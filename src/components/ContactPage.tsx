@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import InquiryForm from './InquiryForm';
 import WhyChooseUs from './WhyChooseUs';
+import WeddingProcess from './WeddingProcess';
 import { Inquiry } from '../types';
 import { MapPin, Phone, Mail, ChevronDown, ChevronUp, Clock, HelpCircle } from 'lucide-react';
 
 interface ContactPageProps {
   onSuccessSubmit?: (newInquiry: Inquiry) => void;
   defaultType?: 'wedding' | 'event' | 'dj-artist' | 'other';
+  onNavigate?: (view: string) => void;
 }
 
-export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding' }: ContactPageProps) {
+export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding', onNavigate }: ContactPageProps) {
   // Collapsible FAQ state
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -32,7 +34,7 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding' }
     },
     {
       q: "What equipment do you use and do you bring backups?",
-      a: "We shoot with state-of-the-art dual-slot Sony full-frame bodies, capturing every image in real-time onto two separate memory cards. We always bring redundant, duplicate sets of cameras, prime G-Master lenses, off-camera flashes, and lighting stands to every single wedding and event. In 200+ weddings, our backups have never failed us."
+      a: "We shoot with state-of-the-art dual-slot Sony full-frame bodies, capturing every image in real-time onto two separate memory cards. We always bring redundant, duplicate sets of cameras, prime G-Master lenses, off-camera flashes, and lighting stands to every single wedding and event. In 200+ celebrations, our backups have never failed us."
     }
   ];
 
@@ -86,7 +88,14 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding' }
                   <Mail className="w-5 h-5 text-white/40 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-medium text-white block">Email Inquiry</span>
-                    <span className="text-white/60">luis@guzziphotography.com</span>
+                    <a 
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-white/60 hover:text-white transition-colors cursor-pointer underline decoration-white/10 hover:decoration-white"
+                    >
+                      guzzistudios.luis@gmail.com
+                    </a>
                   </div>
                 </li>
               </ul>
@@ -152,6 +161,9 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding' }
 
       {/* Why Choose Us Section */}
       <WhyChooseUs />
+
+      {/* Experience Process and Specialty Services */}
+      <WeddingProcess onNavigate={onNavigate} />
 
     </div>
   );

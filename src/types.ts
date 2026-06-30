@@ -10,6 +10,7 @@ export interface PortfolioItem {
   featured?: boolean;
   tags?: string[];
   badge?: string;
+  badges?: string[];
 }
 
 export interface BlogPost {

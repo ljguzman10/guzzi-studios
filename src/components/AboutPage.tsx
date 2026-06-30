@@ -93,7 +93,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 className="w-full p-3.5 border border-slate-300/40 hover:border-slate-200 text-slate-300 hover:text-white bg-slate-300/5 hover:bg-slate-300/10 hover:shadow-[0_0_15px_rgba(203,213,225,0.2)] transition-all rounded-sm font-mono flex items-center justify-center space-x-2.5 text-xs font-semibold tracking-wider uppercase"
               >
                 <Instagram className="w-4 h-4 text-slate-400" />
-                <span>Follow @guzzi_photo</span>
+                <span>FOLLOW @GUZZISTUDIOS</span>
               </a>
             </div>
 

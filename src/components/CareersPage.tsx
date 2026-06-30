@@ -21,6 +21,7 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lastGmailUrl, setLastGmailUrl] = useState('');
 
   const roles = [
     { id: 'second-photographer', label: 'Second Photographer' },
@@ -65,6 +66,26 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
       const apps = existing ? JSON.parse(existing) : [];
       apps.push(newApplication);
       localStorage.setItem('guzzi_applications', JSON.stringify(apps));
+
+      // Construct Gmail redirection URL
+      const roleLabel = roles.find(r => r.id === newApplication.role)?.label || newApplication.role;
+      const subject = `New Team Application: ${newApplication.name} - ${roleLabel}`;
+      const body = `Hello Luis,\n\nYou have received a new team application. Here are the details:\n\n` +
+        `- Name: ${newApplication.name}\n` +
+        `- Email: ${newApplication.email}\n` +
+        `- Phone: ${newApplication.phone}\n` +
+        `- Role of Interest: ${roleLabel}\n` +
+        `- Portfolio: ${newApplication.portfolio}\n` +
+        `- Instagram: ${newApplication.instagram || 'N/A'}\n` +
+        `- Gear setup: ${newApplication.gear || 'N/A'}\n\n` +
+        `About / Experience:\n${newApplication.about || 'N/A'}\n\n` +
+        `---\nLogged in client application queue.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setLastGmailUrl(gmailUrl);
+
+      // Open Gmail in a new tab/window to submit
+      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
 
       setIsSuccess(true);
     } catch (err) {
@@ -164,7 +185,17 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
                   <p className="text-white/60 text-sm font-sans font-light leading-relaxed max-w-md mx-auto">
                     Thank you for applying to join our creative team. Luis Guzman and our brand coordinators will review your portfolio and work history. If your visual style matches our aesthetic, we will contact you via email to schedule a video screening.
                   </p>
-                  <div className="pt-6">
+                  <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    {lastGmailUrl && (
+                      <a
+                        href={lastGmailUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3 bg-white text-[#0C0C0C] hover:bg-white/90 font-bold transition-all text-xs tracking-[0.2em] uppercase cursor-pointer font-sans inline-flex items-center gap-2"
+                      >
+                        <span>Send via Gmail</span>
+                      </a>
+                    )}
                     <button
                       onClick={() => {
                         onNavigate('home');

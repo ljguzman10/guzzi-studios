@@ -22,6 +22,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [lastGmailUrl, setLastGmailUrl] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -67,6 +68,25 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
         if (onSuccessSubmit) {
           onSuccessSubmit(newInquiry);
         }
+
+        // Construct Gmail redirection URL
+        const subject = `New Inquiry: ${newInquiry.name} - Guzzi Photography`;
+        const body = `Hello Luis,\n\nYou have received a new inquiry from your website. Here are the details:\n\n` +
+          `- Name: ${newInquiry.name}\n` +
+          `- Email: ${newInquiry.email}\n` +
+          `- Phone: ${newInquiry.phone || 'N/A'}\n` +
+          `- Date: ${newInquiry.date}\n` +
+          `- Type: ${newInquiry.type}\n` +
+          `- Venue: ${newInquiry.venue}\n` +
+          `- Budget: ${newInquiry.budget}\n\n` +
+          `Message:\n${newInquiry.message}\n\n` +
+          `---\nLogged in client database.`;
+
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setLastGmailUrl(gmailUrl);
+
+        // Open the Gmail URL in a new tab/window to send it
+        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
 
         setIsSuccess(true);
         // Clear Form
@@ -125,7 +145,17 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             <p className="text-white/60 text-sm font-sans font-light leading-relaxed max-w-md mx-auto">
               Thank you for reaching out, your inquiry has been logged into our client database. Luis Guzman will personally review your timeline, check availability, and contact you via email or phone within 24 hours.
             </p>
-            <div className="pt-6">
+            <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {lastGmailUrl && (
+                <a
+                  href={lastGmailUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-white text-[#0C0C0C] hover:bg-white/90 font-bold transition-all text-xs tracking-[0.2em] uppercase cursor-pointer font-sans inline-flex items-center gap-2"
+                >
+                  <span>Send via Gmail</span>
+                </a>
+              )}
               <button
                 onClick={() => setIsSuccess(false)}
                 className="px-6 py-3 border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all text-xs tracking-[0.2em] uppercase font-semibold cursor-pointer font-sans"
