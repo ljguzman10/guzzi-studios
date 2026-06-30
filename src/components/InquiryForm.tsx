@@ -65,7 +65,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             "Accept": "application/json"
           },
           body: JSON.stringify({
-            access_key: "dad70d2f-c9c2-4476-98fb-5bfdb84678ce",
+            access_key: "0164c78e-152d-4414-a831-61f2621bb059",
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
