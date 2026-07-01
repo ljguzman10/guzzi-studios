@@ -8,7 +8,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Cantigny Park',
     subtitle: 'Beth & Trevor',
     location: 'Wheaton, IL',
-    image: new URL('./assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782436761072.jpg',
     year: '2025',
     featured: true,
     tags: ['EditorialLove', 'LuxeFlora', 'Historic']
@@ -19,7 +19,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Estate Wedding',
     subtitle: 'Tessa & Douglas',
     location: 'Chicago, IL',
-    image: new URL('./assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782504926122.jpg',
     year: '2024',
     featured: true,
     tags: ['Cinematic', 'Outdoor', 'Emotional']
@@ -30,7 +30,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Navy Pier',
     subtitle: 'Steven & Steven',
     location: 'Chicago, IL',
-    image: new URL('./assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782511010199.jpg',
     year: '2025',
     featured: true,
     tags: ['Fine Art', 'Coastal', 'Minimalist']
@@ -41,7 +41,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Saint Mary of The Angels Church',
     subtitle: 'Guadalupe & Andy',
     location: 'Chicago, IL',
-    image: new URL('./assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782519856684.jpg',
     year: '2024',
     featured: false,
     tags: ['Industrial Chic', 'Night Energy', 'Candid']
@@ -52,7 +52,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Bar Avec Anniversary',
     subtitle: 'Katherine & Cliff',
     location: 'Chicago, IL',
-    image: new URL('./assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782523040836.jpg',
     year: '2024',
     featured: false,
     tags: ['Romantic', 'Candid', 'Golden Hour']
@@ -63,7 +63,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Magnificent Mile Engagement Party',
     subtitle: 'Makaela & Diego',
     location: 'Chicago, IL',
-    image: new URL('./assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href,
+    image: '/src/assets/images/regenerated_image_1782516236476.jpg',
     year: '2025',
     featured: false,
     tags: ['Vintage', 'Urban', 'Black Tie']
