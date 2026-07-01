@@ -103,14 +103,18 @@ async function startServer() {
     res.redirect('/login');
   }
 
-  // --- AUTHENTICATION ROUTES ---
+ // --- AUTHENTICATION ROUTES ---
   app.get('/login', (req, res) => {
-    // Looks first inside public folder, then root fallback
-    const publicPath = path.join(__dirname, 'public', 'login.html');
-    if (fs.existsSync(publicPath)) {
-      return res.sendFile(publicPath);
+    // Look in the root directory where the server file is
+    const loginPath = path.join(__dirname, 'login.html');
+    
+    // Check if it exists, otherwise check a common Vercel alternative path
+    if (fs.existsSync(loginPath)) {
+      return res.sendFile(loginPath);
+    } else {
+      // Fallback: check one level up (common in Vercel builds)
+      return res.sendFile(path.join(process.cwd(), 'login.html'));
     }
-    res.sendFile(path.join(__dirname, 'login.html'));
   });
 
   app.post('/login', (req, res) => {
@@ -207,10 +211,19 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[GUZZI STUDIOS] Server initialized on port ${PORT}`);
-  });
-}
+ // Remove the old app.listen and use this instead:
+  if (process.env.NODE_ENV === 'production') {
+    module.exports = app;
+  } else {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`[GUZZI STUDIOS] Server initialized on port ${PORT}`);
+    });
+  }
+} // This closing brace ends the startServer() function
+
+startServer().catch((error) => {
+  console.error("FATAL: Failed to initiate server bootstrapping sequence:", error);
+});
 
 startServer().catch((error) => {
   console.error("FATAL: Failed to initiate server bootstrapping sequence:", error);
