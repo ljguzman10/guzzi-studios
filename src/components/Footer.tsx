@@ -129,13 +129,13 @@ export default function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
             <span>Join our team</span>
           </button>
 
-          <button
-            onClick={onOpenAdmin}
+          <a
+            href="/login"
             className="text-white/10 hover:text-white/30 transition-colors p-1 flex items-center cursor-pointer"
             title="Luis's Access Only"
           >
             <Lock className="w-2.5 h-2.5" />
-          </button>
+          </a>
           
           <span className="text-white/10">|</span>
 

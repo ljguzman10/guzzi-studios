@@ -1,33 +1,28 @@
 {
   "version": 2,
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
-  "installCommand": "npm install --force",
   "builds": [
     {
-      "src": "server.js",
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/login",
-      "dest": "server.js"
+      "src": "/(login|logout|admin|api/.*)",
+      "dest": "api/index.js"
     },
     {
-      "src": "/logout",
-      "dest": "server.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/index.html"
     }
   ]
 }
