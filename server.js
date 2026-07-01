@@ -104,16 +104,15 @@ async function startServer() {
   }
 
  // --- AUTHENTICATION ROUTES ---
-  app.get('/login', (req, res) => {
-    // Look in the root directory where the server file is
-    const loginPath = path.join(__dirname, 'login.html');
+app.get('/login', (req, res) => {
+    // process.cwd() always points to the root of your project on Vercel
+    const loginPath = path.join(process.cwd(), 'login.html');
     
-    // Check if it exists, otherwise check a common Vercel alternative path
     if (fs.existsSync(loginPath)) {
       return res.sendFile(loginPath);
     } else {
-      // Fallback: check one level up (common in Vercel builds)
-      return res.sendFile(path.join(process.cwd(), 'login.html'));
+      // Last-ditch effort: look in the public folder if it exists
+      return res.sendFile(path.join(process.cwd(), 'public', 'login.html'));
     }
   });
 
