@@ -66,7 +66,7 @@ export default function AboutLuisSection({ onNavigate }: AboutLuisSectionProps) 
             </blockquote>
 
             <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed font-light">
-              With more than 200 weddings documented, Luis combines clean architectural composition, authentic emotion, and a distinct fashion-editorial perspective. Whether it is a quiet black-tie reception on the shores of Lake Geneva or a heavy bass-line underground music event in Chicago, he delivers absolute professional craftsmanship.
+              With more than 200 celebrations documented, Luis combines clean composition, authentic emotion, and a distinct fashion-editorial perspective. Whether it is a quiet black-tie reception in a high rise or a heavy bass-line underground music event in Chicago, he delivers absolute professional craftsmanship.
             </p>
 
             {/* Core Stats Inline */}

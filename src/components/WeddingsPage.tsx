@@ -22,27 +22,36 @@ useEffect(() => {
           return { ...item, title: 'Estate Wedding', location: 'Chicago, IL', subtitle: 'Tessa & Douglas', image: new URL('../assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href, year: '2024' };
         }
         if (item.id === 'w3') {
-          return { ...item, title: 'Navy Pier', location: 'Chicago, IL', subtitle: 'Steven & Steven', image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href, year: '2025' };
+          return { ...item, title: 'Navy Pier', location: 'Chicago, IL', subtitle: 'Steven & Steven', image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href, year: '2025', tags: ['AnchoredAtThePier', 'SparksFly', 'BoatCeremony'] };
         }
         if (item.id === 'w4') {
-          return { ...item, title: 'Magnificent Mile Engagement Party', subtitle: 'Makaela & Diego', image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href };
+          return { ...item, title: 'Mag Mile Engagement Party', subtitle: 'Makaela & Diego', image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href, tags: ['Vintage', 'Urban', 'UpAbove'] };
         }
         if (item.id === 'w5') {
-          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href };
+          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href, tags: ['Anniversary', 'Views', 'Golden Hour'] };
         }
         if (item.id === 'w6') {
-          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024' };
+          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024', tags: ['Industrial Chic', 'Traditional', 'Candid'] };
         }
         return item;
       });
       
+      // Swap positions of w2 and w6 to respect layout changes requested by user (ensure w6 is before w2)
+      const w2Idx = updated.findIndex(item => item.id === 'w2');
+      const w6Idx = updated.findIndex(item => item.id === 'w6');
+      if (w2Idx !== -1 && w6Idx !== -1 && w2Idx < w6Idx) {
+        const temp = updated[w2Idx];
+        updated[w2Idx] = updated[w6Idx];
+        updated[w6Idx] = temp;
+      }
+
       // Swap positions of w4 and w6 to respect layout changes requested by user (ensure w6 is before w4)
       const w4Idx = updated.findIndex(item => item.id === 'w4');
-      const w6Idx = updated.findIndex(item => item.id === 'w6');
-      if (w4Idx !== -1 && w6Idx !== -1 && w4Idx < w6Idx) {
+      const w6IdxNew = updated.findIndex(item => item.id === 'w6');
+      if (w4Idx !== -1 && w6IdxNew !== -1 && w4Idx < w6IdxNew) {
         const temp = updated[w4Idx];
-        updated[w4Idx] = updated[w6Idx];
-        updated[w6Idx] = temp;
+        updated[w4Idx] = updated[w6IdxNew];
+        updated[w6IdxNew] = temp;
       }
 
       if (JSON.stringify(parsed) !== JSON.stringify(updated)) {

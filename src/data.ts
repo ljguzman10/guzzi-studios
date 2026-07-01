@@ -8,32 +8,10 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Cantigny Park',
     subtitle: 'Beth & Trevor',
     location: 'Wheaton, IL',
-    image: '/src/assets/images/regenerated_image_1782436761072.jpg',
+    image: new URL('./assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href,
     year: '2025',
     featured: true,
     tags: ['EditorialLove', 'LuxeFlora', 'Historic']
-  },
-  {
-    id: 'w2',
-    category: 'weddings',
-    title: 'Estate Wedding',
-    subtitle: 'Tessa & Douglas',
-    location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782504926122.jpg',
-    year: '2024',
-    featured: true,
-    tags: ['Cinematic', 'Outdoor', 'Emotional']
-  },
-  {
-    id: 'w3',
-    category: 'weddings',
-    title: 'Navy Pier',
-    subtitle: 'Steven & Steven',
-    location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782511010199.jpg',
-    year: '2025',
-    featured: true,
-    tags: ['Fine Art', 'Coastal', 'Minimalist']
   },
   {
     id: 'w6',
@@ -41,10 +19,32 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Saint Mary of The Angels Church',
     subtitle: 'Guadalupe & Andy',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782519856684.jpg',
+    image: new URL('./assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href,
     year: '2024',
     featured: false,
-    tags: ['Industrial Chic', 'Night Energy', 'Candid']
+    tags: ['Industrial Chic', 'Traditional', 'Candid']
+  },
+  {
+    id: 'w3',
+    category: 'weddings',
+    title: 'Navy Pier',
+    subtitle: 'Steven & Steven',
+    location: 'Chicago, IL',
+    image: new URL('./assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href,
+    year: '2025',
+    featured: true,
+    tags: ['AnchoredAtThePier', 'SparksFly', 'BoatCeremony']
+  },
+  {
+    id: 'w2',
+    category: 'weddings',
+    title: 'Estate Wedding',
+    subtitle: 'Tessa & Douglas',
+    location: 'Chicago, IL',
+    image: new URL('./assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href,
+    year: '2024',
+    featured: true,
+    tags: ['Cinematic', 'Outdoor', 'Emotional']
   },
   {
     id: 'w5',
@@ -52,21 +52,21 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Bar Avec Anniversary',
     subtitle: 'Katherine & Cliff',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782523040836.jpg',
+    image: new URL('./assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href,
     year: '2024',
     featured: false,
-    tags: ['Romantic', 'Candid', 'Golden Hour']
+    tags: ['Anniversary', 'Views', 'Golden Hour']
   },
   {
     id: 'w4',
     category: 'weddings',
-    title: 'Magnificent Mile Engagement Party',
+    title: 'Mag Mile Engagement Party',
     subtitle: 'Makaela & Diego',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782516236476.jpg',
+    image: new URL('./assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href,
     year: '2025',
     featured: false,
-    tags: ['Vintage', 'Urban', 'Black Tie']
+    tags: ['Vintage', 'Urban', 'UpAbove']
   },
 
   // Events
@@ -79,7 +79,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural']
+    tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition']
   },
   {
     id: 'e2',
@@ -90,7 +90,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200',
     year: '2025',
     featured: true,
-    tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle']
+    tags: ['TheGrandDebut', 'Cultural', 'SatinInTheSaddle']
   },
   {
     id: 'e3',
@@ -101,7 +101,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200',
     year: '2024',
     featured: false,
-    tags: ['PoliticalParty', 'Gala', 'MidnightChicago'],
+    tags: ['PoliticalParty', 'Gala', 'WarehouseVibes'],
     badge: 'HEADLINER: @FOURCOLORZACK',
     badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD']
   },

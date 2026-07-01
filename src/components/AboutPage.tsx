@@ -124,13 +124,13 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
 
             <div className="space-y-6 text-white/75 text-sm md:text-base font-light leading-relaxed">
               <p>
-                My name is Luis Guzman, and I am a 28-year-old Chicago native. For the past five years, I have documented the honest, unscripted, and high-energy celebrations of people and artists throughout the Midwest. 
+                My name is Luis Guzman, and I am a Chicago native. For the past five years, I have professionally documented the honest, unscripted, and high-energy celebrations of people and artists throughout the Midwest.
               </p>
               <p>
                 Growing up in Chicago, I was drawn to the unique contrasts of our city—the architectural symmetry, the gritty industrial street alleys, the warm, reflective sunset light reflecting off the skyscrapers, and the heavy bass-lines of our historic house music clubs. I wanted to capture these worlds, merging a street-level creative perspective with luxury editorial design.
               </p>
               <p>
-                With more than 200 weddings and corporate/nightlife celebrations photographed across Illinois, Wisconsin, and Indiana, Guzzi Photography was born.
+                With more than 200 celebrations across Illinois, Wisconsin, and Indiana, Guzzi Photography was born.
               </p>
             </div>
 

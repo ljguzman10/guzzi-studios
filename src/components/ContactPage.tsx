@@ -79,7 +79,15 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding', 
                   <Phone className="w-5 h-5 text-white/40 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-medium text-white block">Studio Telephone</span>
-                    <span className="text-white/60">(773) 577-7372 (Mon - Fri, 9am - 6pm CST)</span>
+                    <span className="text-white/60">
+                      <a 
+                        href="tel:7735777372" 
+                        className="hover:text-white transition-colors cursor-pointer underline decoration-white/10 hover:decoration-white"
+                      >
+                        (773) 577-7372
+                      </a>{" "}
+                      (Mon - Fri, 9am - 6pm CST)
+                    </span>
                   </div>
                 </li>
                 <li className="flex items-start space-x-3">

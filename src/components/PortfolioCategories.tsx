@@ -14,7 +14,7 @@ const showcasePhotos = [
     title: 'Cantigny Park',
     subtitle: 'Beth & Trevor',
     location: 'Wheaton, IL',
-    image: '/src/assets/images/regenerated_image_1782436761072.jpg',
+    image: new URL('../assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href,
     year: '2025',
     tags: ['EditorialLove', 'LuxeFlora', 'Historic']
   },
@@ -24,7 +24,7 @@ const showcasePhotos = [
     title: 'Estate Wedding',
     subtitle: 'Tessa & Douglas',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782504926122.jpg',
+    image: new URL('../assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href,
     year: '2024',
     tags: ['Cinematic', 'Outdoor', 'Emotional']
   },
@@ -34,9 +34,9 @@ const showcasePhotos = [
     title: 'Navy Pier',
     subtitle: 'Steven & Steven',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782511010199.jpg',
+    image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href,
     year: '2025',
-    tags: ['Fine Art', 'Coastal', 'Minimalist']
+    tags: ['AnchoredAtThePier', 'SparksFly', 'BoatCeremony']
   },
   {
     id: 'm11',
@@ -44,9 +44,9 @@ const showcasePhotos = [
     title: 'Saint Mary of The Angels Church',
     subtitle: 'Guadalupe & Andy',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782519856684.jpg',
+    image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href,
     year: '2024',
-    tags: ['Industrial Chic', 'Night Energy', 'Candid']
+    tags: ['Industrial Chic', 'Traditional', 'Candid']
   },
   {
     id: 'm5',
@@ -54,17 +54,17 @@ const showcasePhotos = [
     title: 'Bar Avec Anniversary',
     subtitle: 'Katherine & Cliff',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782523040836.jpg',
+    image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href,
     year: '2024',
     tags: ['Romantic', 'Candid', 'Golden Hour']
   },
   {
     id: 'm4',
     category: 'weddings',
-    title: 'Magnificent Mile Engagement Party',
+    title: 'Mag Mile Engagement Party',
     subtitle: 'Makaela & Diego',
     location: 'Chicago, IL',
-    image: '/src/assets/images/regenerated_image_1782516236476.jpg',
+    image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href,
     year: '2025',
     tags: ['Vintage', 'Urban', 'Black Tie']
   },

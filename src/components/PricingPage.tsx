@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Sparkles, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle } from 'lucide-react';
+import { Check, Sparkles, Flame, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle } from 'lucide-react';
 import chicagoCouple from '../assets/images/chicago_couple_1782429073568.jpg';
 import chicagoGala from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
 import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
@@ -26,12 +26,12 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
   const weddingPackages = [
     {
       name: "The Classic Collection",
-      price: "$1,800",
+      price: "$950",
       description: "60-Minute Creative Studio, Street Location Session or event set coverage.",
       features: [
         "6 Hours Continuous Coverage",
         "Online Gallery with High-Resolution Digital Files",
-        "500+ Downloadable High Resolution Images",
+        "200-300+ High Resolution Images",
         "Sneak Peek Highlights within 48 Hours",
         "Complimentary Pre-Wedding Planning Consultation"
       ],
@@ -39,13 +39,10 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
     },
     {
       name: "The Editorial Heirloom",
-      price: "$2,400",
+      price: "$1,250",
       description: "Our signature collection. Expands coverage and adds an associate shooter to capture every angle with custom-designed print assets.",
       features: [
         "8 Hours Continuous Coverage",
-        "Premium Online Gallery with Web & Print-Ready Files",
-        "45-Minute Engagement Portrait Session in Chicago",
-        "Luis's Signature Hand-Selected & Color-Graded Proofs",
         "10x10 Custom Flush-mount Album (20 Pages)",
         "Sneak Peek Highlights within 48 Hours",
         "Complimentary Pre-Wedding Planning Consultation"
@@ -55,14 +52,10 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
     },
     {
       name: "The Fine Art Legacy",
-      price: "$2,900",
+      price: "$1,550",
       description: "The ultimate documentation experience. Blends classic film with state-of-the-art digital, securing a massive physical legacy.",
       features: [
         "10 Hours of Continuous Coverage",
-        "2 Lead Photographers + 1 Professional Assistant",
-        "Analog Medium-Format Film & Digital Hybrid Shooting",
-        "1-Hour Rehearsal Dinner or Day-Before Portrait Session",
-        "60-Minute couples shoot in any midwest location",
         "Premium 12x12 Flush-mount Album (40 Prints)"
       ],
       tag: "Full Legacy"
@@ -72,12 +65,13 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
   const eventPackages = [
     {
       name: "The Half-Day Elite",
-      price: "$1,100",
+      price: "$950",
       description: "Perfect for intimate gatherings, private dinings, or streamlined corporate panel sessions.",
       features: [
-        "4 Hours of Continuous Coverage",
+        "Premium Online Gallery with Web & Print-Ready Files",
+        "Luis's Signature Hand-Selected & Color-Graded Proofs",
+        "6 Hours of Continuous Coverage",
         "1 Photographer (Luis Guzman)",
-        "Dedicated Candid Shots & Guest Step-and-Repeat",
         "Online Gallery with High-Resolution Digital Downloads",
         "72-Hour Rapid Highlights Delivery",
         "Standard Commercial Usage Rights for Digital Media"
@@ -86,31 +80,24 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
     },
     {
       name: "The Gala Premium",
-      price: "$2,800",
+      price: "$1,250",
       description: "Robust coverage designed for full-scale society galas, product launches, or multi-room corporate events.",
       features: [
+        "Premium Online Gallery with Web & Print-Ready Files",
+        "Luis's Signature Hand-Selected & Color-Graded Proofs",
         "8 Hours of Continuous Coverage",
-        "2 Photographers (Luis + Associate) for full room scope",
-        "Main Ballroom Coverage + Secondary Room Candid documentation",
-        "Next-Morning PR Press Image Deliveries (Up to 15 Selected Shots)",
-        "Signature High-Contrast Black & White Candid Gallery Accent",
-        "Standard Delivery of Complete Gallery within 5 Business Days",
-        "Full Commercial & Editorial Usage Rights"
+        "Standard Delivery of Complete Gallery within 5 Business Days"
       ],
       tag: "Most Popular",
       popular: true
     },
     {
       name: "The Summit Multi-Day",
-      price: "$4,500",
+      price: "$1,550",
       description: "Ultimate multi-day coverage engineered for conventions, conferences, or highly publicized weekend events.",
       features: [
-        "Up to 16 Hours of Coverage across 2-3 consecutive days",
-        "2 Photographers + Dedicated On-Site Media Coordinator",
-        "Full Panel, Keynote, Step-and-Repeat, and Cocktail Mixers",
+        "Up to 10 Hours of Continuous Coverage",
         "Same-Day Digital Image Snippets for Live Social Posting",
-        "Comprehensive VIP / Speaker Portrait Corner Set-Up",
-        "High-Resolution Archive with Lifetime Cloud Storage Hosting",
         "Unlimited Global Media Distribution License"
       ],
       tag: "Enterprise Scope"
@@ -119,44 +106,55 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
 
   const djPackages = [
     {
-      name: "The Press Kit Profile",
-      price: "$300",
+      name: "The Guzzi Package",
+      price: "$175",
       description: "High-end, striking editorial portraits designed for press releases, label signatures, and social branding.",
       features: [
-        "90-Minute Creative Studio or Street Location Session",
-        "Up to 3 Custom Looks & Wardrobe Changes",
-        "5 Signature High-Contrast 'Grit & Luxe' Editorial Retouches",
-        "30 Color-Graded Proofs in High-Resolution",
-        "Dedicated Electronic Press Kit (EPK) Usage License",
-        "Same-Day Concept & Mood-board Alignment Call"
+        "60-Minute Creative Studio or Street Location Session",
+        "Location Professional Headshot",
+        "10 Color-Grades Proofs in High-Resolution",
+        "All Raw Files Taken",
+        "Concept & Mood-board Alignment Call",
+        "3 Hard Edited Photos",
+        "Express 48-Hour Digital Gallery Delivery",
+        "Link to View & Download All Files"
       ],
-      tag: "Artist Promo"
+      tag: "Artist Promo",
+      popular: true
     },
     {
-      name: "The Club Live Set",
-      price: "$800",
+      name: "The Standard Package",
+      price: "$475",
       description: "Dynamic, fast-paced documentation of a live headlining performance or underground club night.",
       features: [
         "Single Venue Event Coverage (Up to 3 Hours)",
-        "High-Impact DJ Booth, Crowd Energy, & Behind-the-Scenes",
-        "Low-Light Club Motion & Long-Exposure Specialty Grits",
+        "Location Professional Headshot",
+        "20 Color-Graded Proofs in High-Resolution",
+        "All Raw Files Taken",
+        "Concept & Mood-board Alignment Call",
+        "6 Hard Edited Photos",
         "Optimized 9:16 Social Media Crop Deliveries Included",
         "Express 48-Hour Digital Gallery Delivery",
-        "Promotional Commercial License for Artist & Venue"
+        "Link to View & Download All Files"
       ],
-      popular: true,
       tag: "Live Performance"
     },
     {
-      name: "The Tour & Studio Pack",
-      price: "$1,500",
+      name: "The Premium Package",
+      price: "$950",
       description: "The complete visual asset engine. Combines a raw live-performance documentation set with an editorial portrait shoot.",
       features: [
         "Single Day Coverage (Up to 6 Hours)",
+        "Location Professional Headshot",
+        "30 Color-Graded Proofs in High-Resolution",
+        "All Raw Files Taken",
+        "Concept & Mood-board Alignment Call",
+        "10 Hard Edited Photos",
         "Next-Morning Delivery of 5 Hero Shots for immediate press push",
-        "Complete Tour Electronic Press Kit (EPK) Branding Assets",
         "Custom Animated GIF / Motion Loops from live performance shots",
-        "Full Artist & Label Lifetime Commercial Distribution Rights"
+        "Full Artist & Label Lifetime Commercial Distribution Rights",
+        "Express 48-Hour Digital Gallery Delivery",
+        "Link to View & Download All Files"
       ],
       tag: "Full Visual Asset Pack"
     }
@@ -238,7 +236,11 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
             >
               {pkg.popular && (
                 <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-white text-[#0C0C0C] text-[9px] uppercase tracking-[0.25em] font-mono py-1 px-4 rounded-sm font-bold flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-gold-500 fill-gold-500" />
+                  {activeTab === 'djs-artists' ? (
+                    <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500 animate-pulse" />
+                  ) : (
+                    <Sparkles className="w-3 h-3 text-gold-500 fill-gold-500" />
+                  )}
                   <span>Most Preferred</span>
                 </div>
               )}
