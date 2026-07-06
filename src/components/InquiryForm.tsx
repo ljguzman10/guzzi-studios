@@ -125,6 +125,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             "Accept": "application/json"
           },
           body: JSON.stringify({
+            // Ensure this key exactly matches your new Web3Forms access key
             access_key: "0164c78e-152d-4414-a831-61f2621bb059",
             name: formData.name,
             email: formData.email,
@@ -133,21 +134,23 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             type: formData.type,
             venue: formData.venue + (secondLocation ? ` (Second Location: ${secondVenue})` : ''),
             budget: formData.budget,
-            message: fullMessage
+            message: fullMessage,
+            // Explicitly pass the subject so your email doesn't get marked as spam
+            subject: `New ${formData.type.toUpperCase()} Inquiry from ${formData.name}`
           })
         });
 
         const result = await response.json();
 
+        // Web3Forms explicitly sends a boolean 'success' flag in the JSON response
         if (!result.success) {
-          throw new Error('Web3Forms failed to process email dispatch.');
+          console.error("Web3Forms API Error Details:", result);
+          throw new Error(result.message || 'Web3Forms failed to process email dispatch.');
         }
 
         // Fetch existing from localStorage for CRM Sync
         const stored = localStorage.getItem('guzzi_inquiries');
         const list = stored ? JSON.parse(stored) : [];
-        list.unshift(newInquiry);
-        localStorage.setItem('guzzi_inquiries', JSON.stringify(list));
 
         // Call callback if provided to update the live CRM view in AdminPanel
         if (onSuccessSubmit) {

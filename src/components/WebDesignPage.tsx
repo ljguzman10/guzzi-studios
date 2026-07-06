@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { Layout, Shield, Server, RefreshCw, Check, Loader, User, Mail, Phone, Landmark, MessageSquare, Globe } from 'lucide-react';
+import { Layout, Shield, Server, RefreshCw, Check, Loader, User, Mail, Phone, Landmark, MessageSquare, Globe, DollarSign, Calendar, Clock } from 'lucide-react';
 import { WebDesignInquiry } from '../types';
 
 interface WebDesignPageProps {
@@ -34,7 +34,7 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+ const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
@@ -46,9 +46,6 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
     }
 
     try {
-      // Simulate save and database log with a tiny delay
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
       const newInquiry: WebDesignInquiry = {
         id: 'web-inq-' + Date.now(),
         name: formData.name,
@@ -62,35 +59,59 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
         createdAt: new Date().toISOString()
       };
 
-      // Save to localStorage so Luis's local system retains it
+      const typeLabel = projectTypes.find(t => t.id === newInquiry.projectType)?.label || newInquiry.projectType;
+      
+      const fullMessage = 
+        `Project Vision & Goals:\n${formData.details}\n\n` +
+        `Continuous Maintenance Desired: ${formData.maintenanceRequired.toUpperCase()}`;
+
+      // Send data to Web3Forms API
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "0164c78e-152d-4414-a831-61f2621bb059",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: `Web Design Consultation: ${formData.name} (${formData.businessName || 'No Business Named'})`,
+          project_type: typeLabel,
+          business_name: formData.businessName || 'Not Specified',
+          message: fullMessage
+        })
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        console.error("Web3Forms API Error Details:", result);
+        throw new Error(result.message || 'Web3Forms failed to process email dispatch.');
+      }
+
+      // Save to localStorage so your system retains it
       const existing = localStorage.getItem('guzzi_web_design_inquiries');
       const list = existing ? JSON.parse(existing) : [];
       list.push(newInquiry);
       localStorage.setItem('guzzi_web_design_inquiries', JSON.stringify(list));
 
-      // Build beautiful prefilled Gmail compose URL
-      const typeLabel = projectTypes.find(t => t.id === newInquiry.projectType)?.label || newInquiry.projectType;
-      const subject = `Web Design Consultation: ${newInquiry.name} (${newInquiry.businessName})`;
-      const body = `Hello Luis,\n\nYou have received a new Web Design & Development inquiry. Here are the project details:\n\n` +
-        `- Client Name: ${newInquiry.name}\n` +
-        `- Email Address: ${newInquiry.email}\n` +
-        `- Phone Number: ${newInquiry.phone}\n` +
-        `- Business/Project: ${newInquiry.businessName}\n` +
-        `- Project Type: ${typeLabel}\n` +
-        `- Continuous Maintenance & Updates Desired: ${newInquiry.maintenanceRequired.toUpperCase()}\n\n` +
-        `Project Vision & Goals:\n${newInquiry.details}\n\n` +
-        `---\nCaptured in Guzzi Studios client CRM.`;
-
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=guzzistudios.luis@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      setLastGmailUrl(gmailUrl);
-
-      // Attempt to launch in background/new tab
-      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      // Clear Form Fields on success
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        businessName: '',
+        projectType: 'portfolio-creative',
+        maintenanceRequired: 'yes',
+        details: ''
+      });
 
       setIsSuccess(true);
     } catch (err) {
       console.error(err);
-      setError('Something went wrong. Please check your inputs and try again.');
+      setError('Something went wrong sending your request. Please check your inputs and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -100,10 +121,112 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
     <div id="web-design-page" className="pt-24 min-h-screen bg-[#F8F9FA] bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:40px_40px] text-stone-900 font-sans border-b border-stone-200 relative">
       
       {/* Editorial Header */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-12">
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-12 relative overflow-visible">
+        
+        {/* Dynamic Vector Rocket Trail */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-visible hidden md:block">
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rocket-trail-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#d97706" stopOpacity="0" />
+                <stop offset="30%" stopColor="#b45309" stopOpacity="0.2" />
+                <stop offset="75%" stopColor="#d97706" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#b45309" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
+            
+            {/* Trail lines wrapping around text area */}
+            <path 
+              d="M 120 280 C 250 320, 320 180, 480 160 C 640 140, 710 260, 840 80" 
+              stroke="url(#rocket-trail-grad)" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              fill="none" 
+            />
+            
+            <path 
+              d="M 110 290 C 240 330, 310 190, 475 170 C 635 150, 700 270, 835 90" 
+              stroke="#f59e0b" 
+              strokeWidth="0.75" 
+              strokeDasharray="4 6" 
+              strokeLinecap="round" 
+              fill="none" 
+              opacity="0.5"
+            />
+
+            {/* Accent loop circling through words */}
+            <path 
+              d="M 320 150 C 400 110, 480 200, 430 240 C 380 280, 330 200, 410 140" 
+              stroke="#b45309" 
+              strokeWidth="1" 
+              strokeDasharray="1 4" 
+              fill="none" 
+              opacity="0.25" 
+            />
+
+            {/* Sparkles / Unreal stars along the trail */}
+            <g transform="translate(180, 270) scale(0.6)">
+              <path d="M 0,-10 L 2,-2 L 10,0 L 2,2 L 0,10 L -2,2 L -10,0 L -2,-2 Z" fill="#d97706" opacity="0.5" />
+            </g>
+            <g transform="translate(440, 190) scale(0.8)">
+              <path d="M 0,-10 L 2,-2 L 10,0 L 2,2 L 0,10 L -2,2 L -10,0 L -2,-2 Z" fill="#b45309" opacity="0.6" />
+            </g>
+            <g transform="translate(620, 210) scale(0.5)">
+              <path d="M 0,-10 L 2,-2 L 10,0 L 2,2 L 0,10 L -2,2 L -10,0 L -2,-2 Z" fill="#d97706" opacity="0.4" />
+            </g>
+            <g transform="translate(790, 120) scale(0.9)">
+              <path d="M 0,-10 L 2,-2 L 10,0 L 2,2 L 0,10 L -2,2 L -10,0 L -2,-2 Z" fill="#b45309" />
+            </g>
+            
+            {/* Cosmic dust points */}
+            <circle cx="280" cy="270" r="2" fill="#d97706" opacity="0.3" />
+            <circle cx="510" cy="150" r="2.5" fill="#b45309" opacity="0.4" />
+            <circle cx="730" cy="180" r="1.5" fill="#f59e0b" opacity="0.5" />
+
+            {/* Minimalist modern rocket ship */}
+            <g transform="translate(840, 80) rotate(52) scale(1.15)">
+              {/* Flame plume */}
+              <path d="M -3 14 L 0 30 L 3 14 Z" fill="url(#rocket-trail-grad)" opacity="0.85" />
+              <path d="M -1.5 14 L 0 22 L 1.5 14 Z" fill="#f59e0b" />
+              
+              {/* Fins */}
+              <path d="M -7 5 L -14 15 L -6 12 Z" fill="#78350f" stroke="#78350f" strokeWidth="0.5" />
+              <path d="M 7 5 L 14 15 L 6 12 Z" fill="#78350f" stroke="#78350f" strokeWidth="0.5" />
+              
+              {/* Main Body */}
+              <path d="M 0 -22 C 5 -10 7 2 5 14 L -5 14 C -7 2 -5 -10 0 -22 Z" fill="#FFFFFF" stroke="#78350f" strokeWidth="1.5" />
+              
+              {/* Window */}
+              <circle cx="0" cy="-3" r="2.5" fill="#d97706" stroke="#78350f" strokeWidth="0.75" />
+              
+              {/* Tip */}
+              <path d="M 0 -22 C 2 -18 3 -15 3 -12 L -3 -12 C -3 -15 -2 -18 0 -22 Z" fill="#78350f" />
+            </g>
+          </svg>
+        </div>
+
+        {/* Dynamic Vector Rocket Trail for Mobile */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-visible md:hidden">
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 350 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              d="M 40 210 Q 120 220 180 140 T 280 50" 
+              stroke="#d97706" 
+              strokeWidth="1.5" 
+              fill="none" 
+              opacity="0.5"
+            />
+            <g transform="translate(280, 50) rotate(52) scale(0.75)">
+              <path d="M -3 14 L 0 26 L 3 14 Z" fill="#f59e0b" />
+              <path d="M -7 5 L -14 15 L -6 12 Z" fill="#78350f" />
+              <path d="M 7 5 L 14 15 L 6 12 Z" fill="#78350f" />
+              <path d="M 0 -22 C 5 -10 7 2 5 14 L -5 14 C -7 2 -5 -10 0 -22 Z" fill="#FFFFFF" stroke="#78350f" strokeWidth="1.5" />
+            </g>
+          </svg>
+        </div>
+
+        <div className="text-center max-w-3xl mx-auto space-y-4 relative z-10">
           <span className="text-amber-800 text-[10px] tracking-[0.3em] uppercase font-semibold font-mono block">
-            Digital Architecture & Design
+            LAUNCH YOUR VISION TODAY
           </span>
           <h1 className="font-serif text-4xl md:text-6xl text-stone-900 tracking-tight leading-tight font-light">
             Luxury Websites for Visionaries
@@ -198,7 +321,58 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
           </div>
 
           {/* Right Column: Interactive Consultation Planner (7 columns) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 space-y-8">
+            
+            {/* Bespoke Launch Blueprint (Moved above Launch Your Project and made full-width of the column) */}
+            <div className="p-8 md:p-10 border border-stone-200 bg-white shadow-sm space-y-5 rounded-sm">
+              <span className="text-[9px] tracking-[0.2em] uppercase text-amber-700 font-mono block">TRANSPARENT VALUE & TIMELINE</span>
+              <h3 className="font-serif text-lg md:text-xl tracking-tight font-light text-stone-900">Bespoke Launch Blueprint</h3>
+              <p className="text-stone-600 text-xs font-sans font-light leading-relaxed">
+                We reject confusing hourly rates or expensive premium agency markups. Our streamlined framework is designed for direct, executive-level speed and value.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 border-t border-stone-100">
+                {/* Retainer detail */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center flex-shrink-0 text-amber-700 border border-stone-200">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-semibold text-stone-900 tracking-wider uppercase font-sans">50% Retainer</h4>
+                    <p className="text-[11px] text-stone-500 font-sans font-light leading-relaxed">
+                      Secure your scheduling slot with a standard 50% initial retainer fee. Remaining balance is payable upon satisfaction.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Pricing detail */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center flex-shrink-0 text-amber-700 border border-stone-200">
+                    <DollarSign className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-semibold text-stone-900 tracking-wider uppercase font-sans">Flat $900 Total</h4>
+                    <p className="text-[11px] text-stone-500 font-sans font-light leading-relaxed">
+                      Flat $900 development cost. Full domain configuration, responsive mobile polish, and hosting setup included.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Timeline detail */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center flex-shrink-0 text-amber-700 border border-stone-200">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-semibold text-stone-900 tracking-wider uppercase font-sans">4–6 Weeks</h4>
+                    <p className="text-[11px] text-stone-500 font-sans font-light leading-relaxed">
+                      Your platform will be fully functional, optimized for SEO, and live for customers worldwide in four to six weeks.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="w-full bg-white border border-stone-200 p-8 md:p-12 shadow-xl rounded-sm text-stone-900">
               
               {isSuccess ? (
@@ -243,7 +417,7 @@ export default function WebDesignPage({ onNavigate }: WebDesignPageProps) {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="text-center mb-8 space-y-2">
                     <h3 className="font-serif text-2xl md:text-3xl text-stone-900 tracking-tight font-light">
-                      Start Your Project
+                      Launch Your Project
                     </h3>
                     <p className="text-stone-500 text-xs font-sans font-light">
                       Fill out the details below to provision your custom web quote.

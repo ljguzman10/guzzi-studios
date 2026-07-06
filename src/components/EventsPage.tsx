@@ -22,10 +22,27 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
     }
     const updated = items.map(item => {
       if (item.id === 'e1') {
-        return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", badge: 'HEADLINER: @HASHTONMUSIC', badges: ['HEADLINER: @HASHTONMUSIC'], tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition'] };
+        const defaultItem = defaultPortfolioItems.find(d => d.id === 'e1');
+        return { 
+          ...item, 
+          title: 'Penthouse NYE Party', 
+          subtitle: "Hosted by Social Hunt Club with Big Local DJ's", 
+          badge: 'HEADLINER: @HASHTONMUSIC', 
+          badges: ['HEADLINER: @HASHTONMUSIC'], 
+          tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition'],
+          image: defaultItem?.image || item.image
+        };
       }
       if (item.id === 'e2') {
-        return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Cultural', 'SatinInTheSaddle'] };
+        const defaultItem = defaultPortfolioItems.find(d => d.id === 'e2');
+        return { 
+          ...item, 
+          title: 'Quinceañera', 
+          subtitle: "Where heritage meets the urban skyline", 
+          location: 'LINCOLN PARK, CHICAGO', 
+          tags: ['TheGrandDebut', 'Cultural', 'SatinInTheSaddle'],
+          image: defaultItem?.image || item.image
+        };
       }
       if (item.id === 'e3') {
         return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', badge: 'HEADLINER: @FOURCOLORZACK', badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD'], tags: ['PoliticalParty', 'Gala', 'WarehouseVibes'] };

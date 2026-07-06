@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PortfolioItem } from '../types';
 import { MapPin, X, ChevronLeft, ChevronRight, Sparkles, Maximize2 } from 'lucide-react';
 
+import chicagoRooftopParty from '../assets/images/chicago_rooftop_party_1783300677340.jpg';
+import quinceaneraImg from '../assets/images/regenerated_image_1783362452583.jpg';
+import crashSiteImg from '../assets/images/crash_site_bts_1783370119061.jpg';
+import prysmImg from '../assets/images/regenerated_image_1783364630944.jpg';
+import celestImg from '../assets/images/club_crowd_lasers_1782855555903.jpg';
+import redlineImg from '../assets/images/regenerated_image_1783367220371.jpg';
+import kashmirImg from '../assets/images/regenerated_image_1783368986162.jpg';
+import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
+
 interface PortfolioCategoriesProps {
   onNavigate: (view: string) => void;
   portfolioItems?: PortfolioItem[];
@@ -74,27 +83,27 @@ const showcasePhotos = [
     title: 'Penthouse NYE Party',
     subtitle: 'Faceted Light & Shadows',
     location: 'Chicago, IL',
-    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200',
+    image: chicagoRooftopParty,
     year: '2025',
     tags: ['Gala', 'Luxury Corporate', 'Cultural']
   },
   {
     id: 'm7',
     category: 'events',
-    title: 'Evening Luxury Cocktail Launch',
-    subtitle: 'Quinceañera',
+    title: 'Quinceañera',
+    subtitle: 'Where heritage meets the urban skyline',
     location: 'LINCOLN PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200',
+    image: quinceaneraImg,
     year: '2025',
     tags: ['TheGrandDebut', 'Fashion', 'SatinInTheSaddle']
   },
   {
     id: 'm8',
     category: 'djs-artists',
-    title: 'DJ Deck Control',
-    subtitle: 'Sound-Bar Chicago Headliner',
+    title: 'Celest',
+    subtitle: "International Woman's Day",
     location: 'RIVER NORTH, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1200',
+    image: prysmImg,
     year: '2025',
     tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever']
   },
@@ -104,7 +113,7 @@ const showcasePhotos = [
     title: 'Chop Shop',
     subtitle: 'Industrial Foundations Met With Unyielding Frequencies',
     location: 'WICKER PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200',
+    image: djCloseupHands,
     year: '2025',
     tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit']
   },
@@ -114,7 +123,7 @@ const showcasePhotos = [
     title: 'PRYSM',
     subtitle: 'Lollapalooza Aftershow',
     location: 'LINCOLN PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&q=80&w=1200',
+    image: celestImg,
     year: '2024',
     tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura']
   },
@@ -124,11 +133,29 @@ const showcasePhotos = [
     title: 'Redline Chicago',
     subtitle: 'Featuring Deep Underground Techno Afterhours Session',
     location: 'WEST LOOP, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=1200',
+    image: redlineImg,
     year: '2024',
-    tags: ['AfterHours', 'Underground', 'Lasers'],
-    badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA',
-    badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA']
+    tags: ['AfterHours', 'Underground', 'Lasers']
+  },
+  {
+    id: 'm13',
+    category: 'djs-artists',
+    title: 'Kashmir',
+    subtitle: 'Subversive rhythms wrapped in green onyx and velvet',
+    location: 'FULTON MARKET, CHICAGO',
+    image: kashmirImg,
+    year: '2025',
+    tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies']
+  },
+  {
+    id: 'm14',
+    category: 'djs-artists',
+    title: 'Crash Site : Music Video BTS',
+    subtitle: "Hosted by the owners of Harold's Chicken",
+    location: 'CRETE, IL',
+    image: crashSiteImg,
+    year: '2024',
+    tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses']
   }
 ];
 

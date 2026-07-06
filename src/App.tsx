@@ -45,6 +45,7 @@ export default function App() {
       });
 
       const updated = merged.map(item => {
+        const defaultItem = defaultPortfolioItems.find(d => d.id === item.id);
         if (item.id === 'w1') {
           return { ...item, title: 'Cantigny Park', location: 'Wheaton, IL', subtitle: 'Beth & Trevor', image: new URL('./assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href, tags: ['EditorialLove', 'LuxeFlora', 'Historic'] };
         }
@@ -64,28 +65,28 @@ export default function App() {
           return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('./assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024', tags: ['Industrial Chic', 'Traditional', 'Candid'] };
         }
         if (item.id === 'd1') {
-          return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'] };
+          return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'], image: new URL('./assets/images/regenerated_image_1783364630944.jpg', import.meta.url).href };
         }
         if (item.id === 'd5') {
-          return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'] };
+          return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'], image: new URL('./assets/images/club_crowd_lasers_1782855555903.jpg', import.meta.url).href };
         }
         if (item.id === 'd3') {
-          return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'] };
+          return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'], image: new URL('./assets/images/crash_site_bts_1783370119061.jpg', import.meta.url).href };
         }
         if (item.id === 'd4') {
-          return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'] };
+          return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'], image: new URL('./assets/images/regenerated_image_1783368986162.jpg', import.meta.url).href };
         }
         if (item.id === 'd2') {
           return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
         }
         if (item.id === 'd6') {
-          return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'] };
+          return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'], image: new URL('./assets/images/regenerated_image_1783367220371.jpg', import.meta.url).href };
         }
         if (item.id === 'e1') {
-          return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural'] };
+          return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", tags: ['PenthouseNYE', 'Luxury Corporate', 'Cultural'], image: defaultItem?.image || item.image };
         }
         if (item.id === 'e2') {
-          return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle'] };
+          return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle'], image: defaultItem?.image || item.image };
         }
         if (item.id === 'e3') {
           return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', tags: ['PoliticalParty', 'Gala', 'MidnightChicago'] };

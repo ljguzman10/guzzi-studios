@@ -1,4 +1,11 @@
 import { PortfolioItem, BlogPost } from './types';
+import chicagoRooftopParty from './assets/images/chicago_rooftop_party_1783300677340.jpg';
+import quinceaneraImg from './assets/images/regenerated_image_1783362452583.jpg';
+import crashSiteImg from './assets/images/crash_site_bts_1783370119061.jpg';
+import prysmImg from './assets/images/regenerated_image_1783364630944.jpg';
+import celestImg from './assets/images/club_crowd_lasers_1782855555903.jpg';
+import redlineImg from './assets/images/regenerated_image_1783367220371.jpg';
+import kashmirImg from './assets/images/regenerated_image_1783368986162.jpg';
 
 export const portfolioItems: PortfolioItem[] = [
   // Weddings
@@ -76,7 +83,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Penthouse NYE Party',
     subtitle: "Hosted by Social Hunt Club with Big Local DJ's",
     location: 'Chicago, IL',
-    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200',
+    image: chicagoRooftopParty,
     year: '2025',
     featured: true,
     tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition']
@@ -87,7 +94,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Quinceañera',
     subtitle: "Where heritage meets the urban skyline",
     location: 'LINCOLN PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200',
+    image: quinceaneraImg,
     year: '2025',
     featured: true,
     tags: ['TheGrandDebut', 'Cultural', 'SatinInTheSaddle']
@@ -124,7 +131,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Celest',
     subtitle: "International Woman's Day",
     location: 'RIVER NORTH, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1516873240891-4bf014598ab4?auto=format&fit=crop&q=80&w=1200',
+    image: prysmImg,
     year: '2025',
     featured: true,
     tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'],
@@ -136,7 +143,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'PRYSM',
     subtitle: 'Lollapalooza Aftershow',
     location: 'LINCOLN PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&q=80&w=1200',
+    image: celestImg,
     year: '2024',
     featured: false,
     tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'],
@@ -149,7 +156,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Crash Site : Music Video BTS',
     subtitle: "Hosted by the owners of Harold's Chicken",
     location: 'CRETE, IL',
-    image: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=1200',
+    image: crashSiteImg,
     year: '2024',
     featured: false,
     tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'],
@@ -162,7 +169,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Kashmir',
     subtitle: 'Subversive rhythms wrapped in green onyx and velvet',
     location: 'FULTON MARKET, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&q=80&w=1200',
+    image: kashmirImg,
     year: '2025',
     featured: false,
     tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'],
@@ -188,7 +195,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Redline Chicago',
     subtitle: 'Featuring Deep Underground Techno Afterhours Session',
     location: 'WEST LOOP, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=1200',
+    image: redlineImg,
     year: '2024',
     featured: false,
     tags: ['AfterHours', 'Underground', 'Lasers'],

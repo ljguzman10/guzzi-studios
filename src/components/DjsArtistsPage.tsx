@@ -3,6 +3,11 @@ import { PortfolioItem } from '../types';
 import { portfolioItems as defaultPortfolioItems } from '../data';
 import { MapPin, Radio } from 'lucide-react';
 import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
+import celestImg from '../assets/images/club_crowd_lasers_1782855555903.jpg';
+import crashSiteImg from '../assets/images/crash_site_bts_1783370119061.jpg';
+import prysmImg from '../assets/images/regenerated_image_1783364630944.jpg';
+import redlineImg from '../assets/images/regenerated_image_1783367220371.jpg';
+import kashmirImg from '../assets/images/regenerated_image_1783368986162.jpg';
 
 interface DjsArtistsPageProps {
   onNavigate: (view: string) => void;
@@ -21,23 +26,33 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
       items = defaultPortfolioItems.filter(item => item.category === 'djs-artists');
     }
     const updated = items.map(item => {
+      const defaultItem = defaultPortfolioItems.find(d => d.id === item.id);
       if (item.id === 'd1') {
-        return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'] };
+        return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'], image: prysmImg };
       }
       if (item.id === 'd5') {
-        return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'] };
+        return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'], image: celestImg };
       }
       if (item.id === 'd3') {
-        return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'] };
+        return { 
+          ...item, 
+          title: 'Crash Site : Music Video BTS', 
+          subtitle: "Hosted by the owners of Harold's Chicken", 
+          location: 'CRETE, IL', 
+          badge: 'RAPPER: @BOOMANFOREVER', 
+          badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], 
+          tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'],
+          image: crashSiteImg
+        };
       }
       if (item.id === 'd4') {
-        return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'] };
+        return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'], image: kashmirImg };
       }
       if (item.id === 'd2') {
         return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
       }
       if (item.id === 'd6') {
-        return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'] };
+        return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'], image: redlineImg };
       }
       return item;
     });
@@ -153,7 +168,6 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
                       <MapPin className="w-3 h-3 mr-1 text-white/40" />
                       {item.location}
                     </span>
-                    <span>{item.year || '2025'}</span>
                   </div>
 
                   <h3 className="font-serif text-lg md:text-xl text-white font-light group-hover:text-white/80 transition-colors tracking-wide leading-tight">
