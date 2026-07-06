@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { experienceSteps } from '../data';
-import { ArrowRight, MessageSquare, Clipboard, Camera, Edit3, Send, User, Heart, Building, GraduationCap, Video, Palette, Sparkles, Gift, Shirt, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, MessageSquare, Clipboard, Camera, Edit3, Send, User, Heart, Building, GraduationCap, Video, Palette, Sparkles, Gift, Shirt, ChevronDown, ChevronUp, Utensils } from 'lucide-react';
 
 interface WeddingProcessProps {
   onNavigate?: (view: string) => void;
@@ -32,6 +32,11 @@ export default function WeddingProcess({ onNavigate }: WeddingProcessProps) {
       name: "Engagements",
       description: "Bespoke engagement, anniversary, and surprise proposal capture in editorial styles.",
       icon: Sparkles
+    },
+    {
+      name: "Food & Beverage Photography",
+      description: "High-end culinary plating, moody cocktail spreads, and restaurant atmosphere captures.",
+      icon: Utensils
     },
     {
       name: "Graduations",
@@ -150,9 +155,9 @@ export default function WeddingProcess({ onNavigate }: WeddingProcessProps) {
             </p>
           </div>
 
-          {/* Top 3 Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {additionalServices.slice(0, 3).map((service, idx) => {
+          {/* Top 4 Services Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {additionalServices.slice(0, 4).map((service, idx) => {
               const ServiceIcon = service.icon;
               return (
                 <div 
@@ -188,11 +193,11 @@ export default function WeddingProcess({ onNavigate }: WeddingProcessProps) {
                 className="overflow-hidden"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-6">
-                  {additionalServices.slice(3).map((service, idx) => {
+                  {additionalServices.slice(4).map((service, idx) => {
                     const ServiceIcon = service.icon;
                     return (
                       <div 
-                        key={idx + 3}
+                        key={idx + 4}
                         className="p-6 bg-[#111111]/20 border border-white/5 rounded-sm hover:border-white/15 hover:bg-[#111111]/50 transition-all duration-300 group"
                       >
                         <div className="flex items-start space-x-4">

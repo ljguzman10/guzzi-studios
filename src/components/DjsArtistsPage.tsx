@@ -86,7 +86,7 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
           </h1>
           <div className="h-[1px] w-16 bg-white/20 mx-auto mt-4"></div>
           <p className="text-white/60 text-[10px] tracking-[0.25em] font-mono uppercase">
-            Sound-Bar &bull; Radius &bull; Lollapalooza &bull; Backstage
+            MUSIC ARTIST PHOTOGRAPHY
           </p>
         </div>
       </div>
@@ -191,29 +191,38 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
           ))}
         </div>
 
-        {/* Nightlife Technical Accents */}
-        <div className="mt-32 p-8 md:p-16 border border-white/10 bg-[#111111]/30 text-center rounded-sm relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px] opacity-5 pointer-events-none" />
+        {/* Nightlife Technical Accents with Grid Background */}
+        <div className="relative mt-24 py-16 px-6 -mx-6 md:-mx-12 overflow-hidden">
+          {/* Grid background with fade-out masks */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
           
-          <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-            <Radio className="w-6 h-6 text-white/40 mx-auto" />
-            <h3 className="font-serif text-3xl tracking-tight font-light">
-              Tour Diaries & Brand Packets
-            </h3>
-            <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
-              We specialize in full-scale artist representation. From studio portraits and product sponsorships to live concert coverage, we curate your press pack with high-end editorial aesthetics that help you stand out.
-            </p>
+          {/* Gradients to fade grid background into darkness at top and bottom */}
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0C0C0C] to-transparent pointer-events-none z-0" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0C0C0C] to-transparent pointer-events-none z-0" />
 
-            <div className="pt-4">
-              <button
-                onClick={() => {
-                  onNavigate('contact');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-8 py-3.5 bg-white hover:bg-white/80 text-black text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
-              >
-                Inquire For Promo Package
-              </button>
+          <div className="relative z-10 p-8 md:p-16 border border-white/10 bg-[#111111] text-center rounded-sm overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px] opacity-5 pointer-events-none" />
+            
+            <div className="max-w-2xl mx-auto space-y-6 relative z-10">
+              <Radio className="w-6 h-6 text-white/40 mx-auto" />
+              <h3 className="font-serif text-3xl tracking-tight font-light">
+                DJ's & Music Artist's
+              </h3>
+              <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
+                We specialize in full-scale artist representation. From studio portraits and product sponsorships to live concert coverage, we curate your press pack with high-end editorial aesthetics that help you stand out.
+              </p>
+
+              <div className="pt-4">
+                <button
+                  onClick={() => {
+                    onNavigate('contact');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="px-8 py-3.5 bg-white hover:bg-white/80 text-black text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
+                >
+                  Inquire For Promo Package
+                </button>
+              </div>
             </div>
           </div>
         </div>

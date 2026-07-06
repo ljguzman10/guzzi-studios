@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Check, Sparkles, Flame, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle } from 'lucide-react';
+import { Check, Sparkles, Flame, Clock, Shield, Camera, Award, ChevronRight, ArrowRight, HelpCircle, BadgeCheck } from 'lucide-react';
 import chicagoCouple from '../assets/images/chicago_couple_1782429073568.jpg';
-import chicagoGala from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
+import chicagoGala from '../assets/images/chicago_rooftop_party_1783300677340.jpg';
 import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
 
 interface PricingPageProps {
@@ -30,10 +30,12 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       description: "60-Minute Creative Studio, Street Location Session or event set coverage.",
       features: [
         "6 Hours Continuous Coverage",
-        "Online Gallery with High-Resolution Digital Files",
+        "Complimentary Pre-Wedding Planning Consultation",
+        "One Location",
+        "Online Gallery with High-Resolution Downloadable Files",
         "200-300+ High Resolution Images",
-        "Sneak Peek Highlights within 48 Hours",
-        "Complimentary Pre-Wedding Planning Consultation"
+        "10 Hard Edited Photos",
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Essential Coverage"
     },
@@ -43,9 +45,13 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       description: "Our signature collection. Expands coverage and adds an associate shooter to capture every angle with custom-designed print assets.",
       features: [
         "8 Hours Continuous Coverage",
+        "Complimentary Pre-Wedding Planning Consultation",
+        "Up to 2 Locations",
+        "Online Gallery with High-Resolution Downloadable Files",
+        "300-500 High Resolution Images",
+        "15 Hard Edited Photos",
         "10x10 Custom Flush-mount Album (20 Pages)",
-        "Sneak Peek Highlights within 48 Hours",
-        "Complimentary Pre-Wedding Planning Consultation"
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Most Requested",
       popular: true
@@ -56,7 +62,13 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       description: "The ultimate documentation experience. Blends classic film with state-of-the-art digital, securing a massive physical legacy.",
       features: [
         "10 Hours of Continuous Coverage",
-        "Premium 12x12 Flush-mount Album (40 Prints)"
+        "Complimentary Pre-Wedding Planning Consultation",
+        "Up to 3 Locations",
+        "Online Gallery with High-Resolution Downloadable Files",
+        "1000+ High Resolution Images",
+        "20 Hard Edited Photos",
+        "Premium 12x12 Flush-mount Album (40 Prints)",
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Full Legacy"
     }
@@ -68,13 +80,11 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       price: "$950",
       description: "Perfect for intimate gatherings, private dinings, or streamlined corporate panel sessions.",
       features: [
-        "Premium Online Gallery with Web & Print-Ready Files",
-        "Luis's Signature Hand-Selected & Color-Graded Proofs",
         "6 Hours of Continuous Coverage",
-        "1 Photographer (Luis Guzman)",
         "Online Gallery with High-Resolution Digital Downloads",
-        "72-Hour Rapid Highlights Delivery",
-        "Standard Commercial Usage Rights for Digital Media"
+        "200-300+ High Resolution Images",
+        "10 Hard Edited Photos",
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Compact Events"
     },
@@ -83,10 +93,11 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       price: "$1,250",
       description: "Robust coverage designed for full-scale society galas, product launches, or multi-room corporate events.",
       features: [
-        "Premium Online Gallery with Web & Print-Ready Files",
-        "Luis's Signature Hand-Selected & Color-Graded Proofs",
         "8 Hours of Continuous Coverage",
-        "Standard Delivery of Complete Gallery within 5 Business Days"
+        "Online Gallery with High-Resolution Digital Downloads",
+        "300-500+ High Resolution Images",
+        "15 Hard Edited Photos",
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Most Popular",
       popular: true
@@ -97,8 +108,10 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       description: "Ultimate multi-day coverage engineered for conventions, conferences, or highly publicized weekend events.",
       features: [
         "Up to 10 Hours of Continuous Coverage",
-        "Same-Day Digital Image Snippets for Live Social Posting",
-        "Unlimited Global Media Distribution License"
+        "Online Gallery with High-Resolution Digital Downloads",
+        "200-300+ High Resolution Images",
+        "20 Hard Edited Photos",
+        "Sneak Peek Highlights within 48 Hours"
       ],
       tag: "Enterprise Scope"
     }
@@ -112,7 +125,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       features: [
         "60-Minute Creative Studio or Street Location Session",
         "Location Professional Headshot",
-        "10 Color-Grades Proofs in High-Resolution",
+        "20+ Color-Grades Proofs in High-Resolution",
         "All Raw Files Taken",
         "Concept & Mood-board Alignment Call",
         "3 Hard Edited Photos",
@@ -129,10 +142,10 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       features: [
         "Single Venue Event Coverage (Up to 3 Hours)",
         "Location Professional Headshot",
-        "20 Color-Graded Proofs in High-Resolution",
+        "100+ Color-Grades Proofs in High-Resolution",
         "All Raw Files Taken",
         "Concept & Mood-board Alignment Call",
-        "6 Hard Edited Photos",
+        "5 Hard Edited Photos",
         "Optimized 9:16 Social Media Crop Deliveries Included",
         "Express 48-Hour Digital Gallery Delivery",
         "Link to View & Download All Files"
@@ -146,12 +159,11 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
       features: [
         "Single Day Coverage (Up to 6 Hours)",
         "Location Professional Headshot",
-        "30 Color-Graded Proofs in High-Resolution",
+        "200-300+ Color-Grades Proofs in High-Resolution",
         "All Raw Files Taken",
         "Concept & Mood-board Alignment Call",
         "10 Hard Edited Photos",
         "Next-Morning Delivery of 5 Hero Shots for immediate press push",
-        "Custom Animated GIF / Motion Loops from live performance shots",
         "Full Artist & Label Lifetime Commercial Distribution Rights",
         "Express 48-Hour Digital Gallery Delivery",
         "Link to View & Download All Files"
@@ -235,11 +247,11 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
               }`}
             >
               {pkg.popular && (
-                <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-white text-[#0C0C0C] text-[9px] uppercase tracking-[0.25em] font-mono py-1 px-4 rounded-sm font-bold flex items-center gap-1">
+                <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-white text-[#0C0C0C] text-[9px] uppercase tracking-[0.25em] font-mono py-1 px-4 rounded-sm font-bold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(59,130,246,0.15)]">
                   {activeTab === 'djs-artists' ? (
                     <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500 animate-pulse" />
                   ) : (
-                    <Sparkles className="w-3 h-3 text-gold-500 fill-gold-500" />
+                    <BadgeCheck className="w-3.5 h-3.5 text-blue-500 fill-blue-500/10" />
                   )}
                   <span>Most Preferred</span>
                 </div>
@@ -303,7 +315,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
               <h4 className="text-xs font-mono uppercase tracking-wider font-semibold">Transparent Agreements</h4>
             </div>
             <p className="text-xs text-white/60 leading-relaxed font-light">
-              No hidden travel fees for bookings within 75 miles of downtown Chicago. All prices are explicitly locked-in at the moment of booking signature.
+              No hidden travel fees for bookings within 60 miles of downtown Chicago. All prices are explicitly locked-in at the moment of booking signature.
             </p>
           </div>
           <div className="space-y-2">

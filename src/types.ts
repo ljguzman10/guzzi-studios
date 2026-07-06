@@ -54,3 +54,16 @@ export interface TeamApplication {
   status: 'new' | 'reviewed' | 'shortlisted' | 'archived';
   createdAt: string;
 }
+
+export interface WebDesignInquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  businessName: string;
+  projectType: string;
+  maintenanceRequired: 'yes' | 'no';
+  details: string;
+  status: 'new' | 'contacted' | 'booked' | 'archived';
+  createdAt: string;
+}

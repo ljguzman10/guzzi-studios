@@ -17,6 +17,37 @@ import {
   LogOut
 } from 'lucide-react';
 
+const STATUS_CHECKLISTS: Record<'new' | 'contacted' | 'booked' | 'archived', string[]> = {
+  new: [
+    'Emailed Customer',
+    'Called Customer',
+    'Inputted Notes',
+    'Sent Brand Guide PDF',
+    'Reviewed Social Media Handle'
+  ],
+  contacted: [
+    'Sent Price Proposal',
+    'Scheduled Zoom Consultation',
+    'Sent Venue Availability',
+    'Approved Budget Bracket',
+    'Followed up on Inquiry'
+  ],
+  booked: [
+    'Contract Signed & Countersigned',
+    '50% Retainer Received',
+    'Scheduled Shot List Call',
+    'Added to GCal Calendar',
+    'Equipment Check Completed'
+  ],
+  archived: [
+    'Sent "Thank You" or Rejection Note',
+    'Stored Files in Cold Storage',
+    'Released Date Hold',
+    'Added to Newsletter List',
+    'Cleaned Client Entry Folder'
+  ]
+};
+
 interface AdminPanelProps {
   onClose: () => void;
   onRefreshData?: () => void;
@@ -25,6 +56,7 @@ interface AdminPanelProps {
 export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) {
   const [activeTab, setActiveTab] = useState<'crm' | 'portfolio' | 'blogs' | 'applications'>('crm');
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [checklists, setChecklists] = useState<Record<string, boolean>>({});
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [applications, setApplications] = useState<TeamApplication[]>([]);
@@ -199,6 +231,12 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
       localStorage.setItem('guzzi_applications', JSON.stringify(appSeeds));
       setApplications(appSeeds);
     }
+
+    // 5. CRM Checklists
+    const storedChecklists = localStorage.getItem('guzzi_crm_checklists');
+    if (storedChecklists) {
+      setChecklists(JSON.parse(storedChecklists));
+    }
   };
 
   // Update inquiry status
@@ -212,6 +250,13 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
     localStorage.setItem('guzzi_inquiries', JSON.stringify(updated));
     setInquiries(updated);
     if (onRefreshData) onRefreshData();
+  };
+
+  // Toggle specific checklist item
+  const handleToggleChecklist = (key: string, checked: boolean) => {
+    const updated = { ...checklists, [key]: checked };
+    setChecklists(updated);
+    localStorage.setItem('guzzi_crm_checklists', JSON.stringify(updated));
   };
 
   // Save personal notes for inquiry
@@ -585,7 +630,9 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
                         {/* Fast Contact Options */}
                         <div className="grid grid-cols-2 gap-2">
                           <a
-                            href={`mailto:${selectedInquiry.email}`}
+                            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(selectedInquiry.email)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="p-2 border border-white/10 text-center text-[9px] uppercase tracking-widest font-semibold hover:bg-white hover:text-black transition duration-300 text-white"
                           >
                             Email Client
@@ -636,20 +683,42 @@ export default function AdminPanel({ onClose, onRefreshData }: AdminPanelProps) 
 
                         {/* CRM Management actions */}
                         <div className="border-t border-white/10 pt-4 space-y-3">
-                          <h4 className="text-[10px] uppercase font-bold tracking-widest text-white/70">Lead Status Action:</h4>
-                          <div className="flex gap-1">
+                          <h4 className="text-[10px] uppercase font-bold tracking-widest text-white/70">Lead Status & Checklists:</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-black/30 p-3 border border-white/5 rounded-sm">
                             {(['new', 'contacted', 'booked', 'archived'] as const).map((st) => (
-                              <button
-                                key={st}
-                                onClick={() => handleUpdateStatus(selectedInquiry.id, st)}
-                                className={`flex-grow py-1.5 px-1 text-[8px] uppercase tracking-widest font-semibold border rounded-sm transition-all cursor-pointer ${
-                                  selectedInquiry.status === st
-                                    ? 'bg-white text-black border-white'
-                                    : 'bg-transparent hover:bg-white/5 text-white/50 border-white/10'
-                                }`}
-                              >
-                                {st}
-                              </button>
+                              <div key={st} className="flex flex-col space-y-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleUpdateStatus(selectedInquiry.id, st)}
+                                  className={`w-full py-1.5 px-1 text-[8px] uppercase tracking-widest font-semibold border rounded-sm transition-all cursor-pointer ${
+                                    selectedInquiry.status === st
+                                      ? 'bg-white text-black border-white shadow-lg'
+                                      : 'bg-transparent hover:bg-white/5 text-white/40 border-white/10'
+                                  }`}
+                                >
+                                  {st}
+                                </button>
+                                
+                                <div className="space-y-1.5 pl-0.5">
+                                  {STATUS_CHECKLISTS[st].map((item, idx) => {
+                                    const key = `${selectedInquiry.id}_${st}_${idx}`;
+                                    const isChecked = !!checklists[key];
+                                    return (
+                                      <label key={idx} className="flex items-start space-x-1.5 cursor-pointer text-white/50 hover:text-white transition group">
+                                        <input
+                                          type="checkbox"
+                                          checked={isChecked}
+                                          onChange={(e) => handleToggleChecklist(key, e.target.checked)}
+                                          className="mt-0.5 w-3 h-3 text-white bg-white/5 border border-white/10 rounded-sm focus:ring-0 cursor-pointer"
+                                        />
+                                        <span className={`text-[8px] font-sans font-light leading-snug tracking-wide group-hover:underline ${isChecked ? 'line-through text-white/30' : ''}`}>
+                                          {item}
+                                        </span>
+                                      </label>
+                                    );
+                                  })}
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>

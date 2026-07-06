@@ -25,13 +25,13 @@ useEffect(() => {
           return { ...item, title: 'Navy Pier', location: 'Chicago, IL', subtitle: 'Steven & Steven', image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href, year: '2025', tags: ['AnchoredAtThePier', 'SparksFly', 'BoatCeremony'] };
         }
         if (item.id === 'w4') {
-          return { ...item, title: 'Mag Mile Engagement Party', subtitle: 'Makaela & Diego', image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href, tags: ['Vintage', 'Urban', 'UpAbove'] };
+          return { ...item, title: 'Mag Mile Engagement Party', subtitle: 'Makaela & Diego', image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href, tags: ['Engagement', 'Urban', 'UpAbove'] };
         }
         if (item.id === 'w5') {
-          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href, tags: ['Anniversary', 'Views', 'Golden Hour'] };
+          return { ...item, title: 'Bar Avec Anniversary', location: 'Chicago, IL', subtitle: 'Katherine & Cliff', image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href, tags: ['Anniversary', 'Views', 'GoldenHour'] };
         }
         if (item.id === 'w6') {
-          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024', tags: ['Industrial Chic', 'Traditional', 'Candid'] };
+          return { ...item, title: 'Saint Mary of The Angels Church', subtitle: 'Guadalupe & Andy', image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href, location: 'Chicago, IL', year: '2024', tags: ['Churches', 'Traditional', 'Candid'] };
         }
         return item;
       });
@@ -107,7 +107,7 @@ useEffect(() => {
           </h1>
           <div className="h-[1px] w-16 bg-white/20 mx-auto mt-4"></div>
           <p className="text-white/60 text-[10px] tracking-widest font-mono uppercase mt-2">
-            Chicago &bull; Milwaukee &bull; Indianapolis &bull; Destination
+            Chicago &bull; Milwaukee &bull; Michigan &bull; Indianapolis
           </p>
         </div>
       </div>
@@ -130,7 +130,7 @@ useEffect(() => {
               We believe a wedding is not a stuffy photoshoot—it is an unpredictable, magnificent celebration of raw humanity. Our approach balances the absolute precision of fine-art editorial portraits (making you and your loved ones feel spectacular and natural) with the fast-paced instinct of documentary journalism.
             </p>
             <p>
-              Luis Guzman documents the subtle glances, the tearful speeches, and the explosive energy of the dance floor. With over 200 weddings documented across the Midwest, we provide an elite, stress-free partnership that transforms your moments into historic, visual poetry.
+              Luis Guzman documents the subtle glances, the tearful speeches, and the explosive energy of the dance floor. With over 200 celebrations documented across the Midwest, he provide an elite, stress-free partnership that transforms your moments into historic, visual poetry.
             </p>
           </div>
         </div>
@@ -214,39 +214,48 @@ useEffect(() => {
           })}
         </div>
 
-        {/* Trust Badges Footer inside page */}
-        <div className="mt-32 p-12 bg-[#111111]/40 border border-white/10 text-white text-center rounded-sm space-y-8 relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+        {/* Trust Badges Footer inside page with Grid Background */}
+        <div className="relative mt-24 py-16 px-6 -mx-6 md:-mx-12 overflow-hidden">
+          {/* Grid background with fade-out masks */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
           
-          <div className="max-w-2xl mx-auto space-y-4 relative z-10">
-            <Sparkles className="w-6 h-6 text-white/60 mx-auto" />
-            <h3 className="font-serif text-3xl tracking-tight font-light">
-              Ready to Capture Your Legacy?
-            </h3>
-            <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
-              We accept a highly limited number of weddings each year to ensure absolute dedication, meticulous handcrafted editing, and an elite personal partnership with our couples.
-            </p>
-          </div>
+          {/* Gradients to fade grid background into darkness at top and bottom */}
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0C0C0C] to-transparent pointer-events-none z-0" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0C0C0C] to-transparent pointer-events-none z-0" />
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-            <button
-              onClick={() => {
-                onNavigate('contact');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="px-8 py-3.5 bg-white hover:bg-white/80 text-black text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
-            >
-              Reserve Your Date
-            </button>
-            <button
-              onClick={() => {
-                onNavigate('about');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="px-8 py-3.5 bg-transparent border border-white/20 hover:border-white/60 text-white text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
-            >
-              Meet Luis Guzman
-            </button>
+          <div className="relative z-10 p-12 bg-[#111111] border border-white/10 text-white text-center rounded-sm space-y-8 overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+            
+            <div className="max-w-2xl mx-auto space-y-4 relative z-10">
+              <Sparkles className="w-6 h-6 text-white/60 mx-auto" />
+              <h3 className="font-serif text-3xl tracking-tight font-light">
+                Ready to Capture Your Legacy?
+              </h3>
+              <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
+                We accept a highly limited number of weddings each year to ensure absolute dedication, meticulous handcrafted editing, and an elite personal partnership with our couples.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+              <button
+                onClick={() => {
+                  onNavigate('contact');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-8 py-3.5 bg-white hover:bg-white/80 text-black text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
+              >
+                Reserve Your Date
+              </button>
+              <button
+                onClick={() => {
+                  onNavigate('about');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-8 py-3.5 bg-transparent border border-white/20 hover:border-white/60 text-white text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer"
+              >
+                Meet Luis Guzman
+              </button>
+            </div>
           </div>
         </div>
 

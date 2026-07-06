@@ -23,7 +23,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           <div className="flex items-center gap-4">
             <div className="h-[1px] w-12 bg-white/40"></div>
             <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-white/60 font-mono">
-              Chicago &bull; Wisconsin &bull; Indiana
+              Chicago &bull; Wisconsin &bull; Michigan &bull; Indiana
             </span>
           </div>
 
@@ -54,7 +54,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               }}
               className="px-8 py-4 border border-white/20 text-white text-xs tracking-widest uppercase hover:bg-white/5 transition-colors cursor-pointer"
             >
-              - ABOUT GUZZI -
+              The Photographer
             </button>
           </div>
         </div>

@@ -15,6 +15,7 @@ import AboutPage from './components/AboutPage';
 import PricingPage from './components/PricingPage';
 import ContactPage from './components/ContactPage';
 import CareersPage from './components/CareersPage';
+import WebDesignPage from './components/WebDesignPage';
 
 import { PortfolioItem, BlogPost, Inquiry } from './types';
 import { portfolioItems as defaultPortfolioItems, blogPosts as defaultBlogPosts } from './data';
@@ -302,6 +303,10 @@ export default function App() {
 
         {currentView === 'careers' && (
           <CareersPage onNavigate={(view) => setCurrentView(view)} />
+        )}
+
+        {currentView === 'web-design' && (
+          <WebDesignPage onNavigate={(view) => setCurrentView(view)} />
         )}
 
       </main>

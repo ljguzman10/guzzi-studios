@@ -53,7 +53,7 @@ export default function AboutLuisSection({ onNavigate }: AboutLuisSectionProps) 
                 </span>
               </div>
               <h2 className="font-serif text-3xl md:text-5xl text-white tracking-tight leading-tight font-light">
-                Meet Luis Guzman
+                Meet Guzzi
               </h2>
             </div>
 

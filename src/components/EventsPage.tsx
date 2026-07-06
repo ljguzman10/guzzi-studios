@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { PortfolioItem } from '../types';
 import { portfolioItems as defaultPortfolioItems } from '../data';
 import { MapPin, Building } from 'lucide-react';
-import chicagoGalaLounge from '../assets/images/chicago_gala_lounge_1782763049039.jpg';
+import chicagoGalaLounge from '../assets/images/chicago_rooftop_party_1783300677340.jpg';
 
 interface EventsPageProps {
   onNavigate: (view: string) => void;
@@ -22,7 +22,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
     }
     const updated = items.map(item => {
       if (item.id === 'e1') {
-        return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition'] };
+        return { ...item, title: 'Penthouse NYE Party', subtitle: "Hosted by Social Hunt Club with Big Local DJ's", badge: 'HEADLINER: @HASHTONMUSIC', badges: ['HEADLINER: @HASHTONMUSIC'], tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition'] };
       }
       if (item.id === 'e2') {
         return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Cultural', 'SatinInTheSaddle'] };
@@ -60,7 +60,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
           </h1>
           <div className="h-[1px] w-12 bg-white/20 mx-auto mt-4"></div>
           <p className="text-white/60 text-[10px] md:text-xs tracking-widest font-mono uppercase">
-            Sophisticated Candid Documentation &bull; Chicago &bull; Midwest
+            Sophisticated Documentation
           </p>
         </div>
       </div>
@@ -104,9 +104,6 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors" />
-                  <div className="absolute top-4 left-4 bg-black/85 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
-                    Event File
-                  </div>
                   <div className="absolute bottom-3 left-3 flex flex-col gap-1 items-start">
                     {item.badges && item.badges.length > 0 ? (
                       item.badges.map((b, bIdx) => (
@@ -168,30 +165,39 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
           ))}
         </div>
 
-        {/* Corporate Trust Banner */}
-        <div className="mt-32 border border-white/10 p-8 md:p-12 rounded-sm bg-[#111111]/40 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
-          <div className="space-y-3 max-w-2xl">
-            <div className="flex items-center space-x-2">
-              <Building className="w-5 h-5 text-white/40" />
-              <span className="text-[10px] uppercase tracking-widest font-bold text-white/50 font-mono">B2B Event Partnerships</span>
-            </div>
-            <h3 className="font-serif text-2xl text-white font-light tracking-wide">
-              Rapid 48-Hour Press Image Deliveries
-            </h3>
-            <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
-              We understand PR cycles. For all major corporate fundraisers and society galas, we deliver a curated "Press Ready Highlight Folder" containing 25 fully color-graded images within 48 hours of the event climax. Fully insured, venue COIs provided instantly.
-            </p>
-          </div>
+        {/* Corporate Trust Banner with Grid Background */}
+        <div className="relative mt-24 py-16 px-6 -mx-6 md:-mx-12 overflow-hidden">
+          {/* Grid background with fade-out masks */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
           
-          <button
-            onClick={() => {
-              onNavigate('contact');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="w-full md:w-auto px-8 py-4 bg-white hover:bg-white/85 text-black text-xs font-semibold tracking-widest uppercase transition-all shadow-md cursor-pointer font-sans flex-shrink-0"
-          >
-            Inquire For Event Date
-          </button>
+          {/* Gradients to fade grid background into darkness at top and bottom */}
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0C0C0C] to-transparent pointer-events-none z-0" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0C0C0C] to-transparent pointer-events-none z-0" />
+
+          <div className="relative z-10 border border-white/10 p-8 md:p-12 rounded-sm bg-[#111111] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+            <div className="space-y-3 max-w-2xl">
+              <div className="flex items-center space-x-2">
+                <Building className="w-5 h-5 text-white/40" />
+                <span className="text-[10px] uppercase tracking-widest font-bold text-white/50 font-mono">B2B Event Partnerships</span>
+              </div>
+              <h3 className="font-serif text-2xl text-white font-light tracking-wide">
+                Rapid 48-Hour Press Image Deliveries
+              </h3>
+              <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed">
+                We understand PR cycles. For all major corporate fundraisers and society galas, we deliver a curated "Press Ready Highlight Folder" containing fully color-graded images within 48 hours of the event climax depending on your package. Fully insured, venue COIs provided instantly.
+              </p>
+            </div>
+            
+            <button
+              onClick={() => {
+                onNavigate('contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-full md:w-auto px-8 py-4 bg-white hover:bg-white/85 text-black text-xs font-semibold tracking-widest uppercase transition-all shadow-md cursor-pointer font-sans flex-shrink-0"
+            >
+              Inquire For Event Date
+            </button>
+          </div>
         </div>
 
       </div>

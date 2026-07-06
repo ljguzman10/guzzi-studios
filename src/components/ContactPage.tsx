@@ -52,7 +52,7 @@ export default function ContactPage({ onSuccessSubmit, defaultType = 'wedding', 
           </h1>
           <div className="h-[1px] w-12 bg-white/20 mx-auto mt-4"></div>
           <p className="text-white/60 text-xs md:text-sm font-sans font-light leading-relaxed pt-2 max-w-2xl mx-auto">
-            Now booking weddings, private galas, and artist promo sessions throughout Illinois, Wisconsin, Indiana, and destination. Fill out the form below to hold your date provisionally.
+            Now booking Weddings, Private Events, Artist Sessions, and much more! Throughout Illinois, Wisconsin, Indiana, and Michigan. Fill out the form below to hold your date provisionally.
           </p>
         </div>
       </div>

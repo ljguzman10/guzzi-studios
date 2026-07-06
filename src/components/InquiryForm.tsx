@@ -1,6 +1,41 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Inquiry } from '../types';
-import { Check, Calendar, Mail, Phone, User, Landmark, MessageSquare, Loader } from 'lucide-react';
+import { Check, Calendar, Mail, Phone, User, Landmark, MessageSquare, Loader, DollarSign } from 'lucide-react';
+
+const weddingCoveragePhases = [
+  {
+    phase: "Beginning of the Day",
+    items: [
+      { id: "detail_shots", label: "Detail Shots (Rings, invitations, shoes)" },
+      { id: "dress_shots", label: "Dress Shots" },
+      { id: "getting_ready", label: "Getting Ready Shots" },
+      { id: "bridal_gown", label: "Bridal Gown / Flat Lay" },
+      { id: "button_up", label: "Button-Up / Suit & Tux" },
+    ]
+  },
+  {
+    phase: "Middle of the Day / Ceremony",
+    items: [
+      { id: "first_look", label: "First Look" },
+      { id: "ceremony_vows", label: "Ceremony & Vows" },
+      { id: "wedding_party", label: "Wedding Party Portraits" },
+      { id: "family_formals", label: "Family Formals" },
+      { id: "couples_portraits", label: "Couples Portraits" },
+    ]
+  },
+  {
+    phase: "End of the Day / Reception",
+    items: [
+      { id: "grand_entrance", label: "Grand Entrance" },
+      { id: "cake_cutting", label: "Cake Cutting" },
+      { id: "first_dances", label: "First Dances" },
+      { id: "speeches", label: "Speeches" },
+      { id: "dancing_candids", label: "Dancing & Reception Candids" },
+      { id: "bouquet_toss", label: "Bouquet / Garter Toss" },
+      { id: "grand_exit", label: "Grand Exit (Sparklers / Send-off)" },
+    ]
+  }
+];
 
 interface InquiryFormProps {
   onSuccessSubmit?: (newInquiry: Inquiry) => void;
@@ -19,6 +54,9 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
     message: ''
   });
 
+  const [selectedCoverage, setSelectedCoverage] = useState<string[]>([]);
+  const [secondLocation, setSecondLocation] = useState(false);
+  const [secondVenue, setSecondVenue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -28,13 +66,19 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCoverageToggle = (id: string) => {
+    setSelectedCoverage((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
 
     // Basic Validation
-    if (!formData.name || !formData.email || !formData.date || !formData.message) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.type || !formData.venue || !formData.message || (secondLocation && !secondVenue)) {
       setError('Please fill in all mandatory fields (*)');
       setIsSubmitting(false);
       return;
@@ -42,6 +86,22 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
 
     // Process Submission
     setTimeout(async () => {
+      // Find coverage names selected
+      const coverageLabels = selectedCoverage.map(id => {
+        for (const phase of weddingCoveragePhases) {
+          const item = phase.items.find(i => i.id === id);
+          if (item) return item.label;
+        }
+        return id;
+      });
+
+      const coverageText = coverageLabels.length > 0 
+        ? `\n\n[Wedding Day Coverage Desired]:\n` + coverageLabels.map(l => `- ${l}`).join('\n')
+        : '';
+
+      const secondLocText = secondLocation ? `\n\n[Second Location Required]: Yes (Location: ${secondVenue})` : '';
+      const fullMessage = formData.message + coverageText + secondLocText;
+
       const newInquiry: Inquiry = {
         id: 'inq_' + Math.random().toString(36).substr(2, 9),
         name: formData.name,
@@ -51,7 +111,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
         type: formData.type as any,
         venue: formData.venue || 'TBD / Not Specified',
         budget: formData.budget || 'TBD / Flexible',
-        message: formData.message,
+        message: fullMessage,
         status: 'new',
         createdAt: new Date().toISOString()
       };
@@ -71,9 +131,9 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             phone: formData.phone,
             date: formData.date,
             type: formData.type,
-            venue: formData.venue,
+            venue: formData.venue + (secondLocation ? ` (Second Location: ${secondVenue})` : ''),
             budget: formData.budget,
-            message: formData.message
+            message: fullMessage
           })
         });
 
@@ -108,6 +168,9 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
           budget: '',
           message: ''
         });
+        setSelectedCoverage([]);
+        setSecondLocation(false);
+        setSecondVenue('');
       } catch (err) {
         console.error('Submission error:', err);
         setError('There was an issue processing your request and sending the email. Please try again.');
@@ -194,7 +257,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Elena Rostova"
+                  placeholder="John Doe"
                   className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all placeholder-white/25"
                 />
               </div>
@@ -222,7 +285,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             {/* Phone Number */}
             <div className="space-y-1.5">
               <label className="block text-[10px] uppercase tracking-[0.15em] font-semibold text-white/60 font-sans">
-                Phone Number
+                Phone Number <span className="text-white/40">*</span>
               </label>
               <div className="relative">
                 <Phone className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -231,6 +294,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
+                  required
                   placeholder="(773) 577-7372"
                   className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all placeholder-white/25"
                 />
@@ -258,16 +322,17 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             {/* Service Type */}
             <div className="space-y-1.5">
               <label className="block text-[10px] uppercase tracking-[0.15em] font-semibold text-white/60 font-sans">
-                Service Focus
+                Service Focus <span className="text-white/40">*</span>
               </label>
               <select
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
+                required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all appearance-none cursor-pointer"
               >
                 <option value="wedding" className="bg-[#111111] text-white">Wedding Celebration</option>
-                <option value="event" className="bg-[#111111] text-white">Corporate Event / Gala</option>
+                <option value="event" className="bg-[#111111] text-white">Event / Gala / Party</option>
                 <option value="dj-artist" className="bg-[#111111] text-white">DJ & Music Artist Branding</option>
                 <option value="other" className="bg-[#111111] text-white">Other Unique Celebration</option>
               </select>
@@ -276,7 +341,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
             {/* Venue / Location */}
             <div className="space-y-1.5">
               <label className="block text-[10px] uppercase tracking-[0.15em] font-semibold text-white/60 font-sans">
-                Event Venue / Location
+                Event Venue / Location <span className="text-white/40">*</span>
               </label>
               <div className="relative">
                 <Landmark className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -285,30 +350,71 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                   name="venue"
                   value={formData.venue}
                   onChange={handleChange}
+                  required
                   placeholder="e.g. Blackstone Hotel, Chicago"
                   className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all placeholder-white/25"
                 />
+              </div>
+              <div className="pt-1 flex items-center justify-between gap-4">
+                <label className="inline-flex items-center space-x-2 text-[11px] text-white/60 hover:text-white cursor-pointer select-none flex-shrink-0">
+                  <input
+                    type="checkbox"
+                    checked={secondLocation}
+                    onChange={(e) => setSecondLocation(e.target.checked)}
+                    className="sr-only"
+                  />
+                  <div
+                    className={`w-3.5 h-3.5 rounded-sm border flex items-center justify-center transition-all duration-200 ${
+                      secondLocation
+                        ? 'border-gold-200 bg-gold-200 text-[#0C0C0C]'
+                        : 'border-white/20 hover:border-white/40 bg-transparent'
+                    }`}
+                  >
+                    {secondLocation && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                  </div>
+                  <span className="font-sans font-light">Second Location?</span>
+                </label>
+
+                {secondLocation && (
+                  <div className="relative flex-1">
+                    <Landmark className="w-3.5 h-3.5 text-white/30 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      name="secondVenue"
+                      value={secondVenue}
+                      onChange={(e) => setSecondVenue(e.target.value)}
+                      required
+                      placeholder="Enter second location..."
+                      className="w-full pl-9 pr-3 py-1.5 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all placeholder-white/25"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Budget */}
             <div className="col-span-1 md:col-span-2 space-y-1.5">
               <label className="block text-[10px] uppercase tracking-[0.15em] font-semibold text-white/60 font-sans">
-                Estimated Photography Budget
+                Estimated Photography Budget (USD)
               </label>
-              <select
-                name="budget"
-                value={formData.budget}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all cursor-pointer"
-              >
-                <option value="" className="bg-[#111111] text-white/50">Select a range...</option>
-                <option value="$3,000 - $5,000" className="bg-[#111111] text-white">$3,000 – $5,000</option>
-                <option value="$5,000 - $8,000" className="bg-[#111111] text-white">$5,000 – $8,000 (Most Popular)</option>
-                <option value="$8,000 - $12,000" className="bg-[#111111] text-white">$8,000 – $12,000 (Luxury Full Day)</option>
-                <option value="$12,000+" className="bg-[#111111] text-white">$12,000+ (Custom multi-day/destination)</option>
-                <option value="flexible" className="bg-[#111111] text-white">I am flexible / Custom request</option>
-              </select>
+              <div className="relative">
+                <DollarSign className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="number"
+                  name="budget"
+                  min="100"
+                  max="100000"
+                  step="500"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  placeholder="Enter your custom budget (e.g. 5000)"
+                  required
+                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all placeholder-white/25"
+                />
+              </div>
+              <p className="text-[10px] text-white/40 font-light font-mono">
+                Please specify an amount within our service range of $100 to $100,000.
+              </p>
             </div>
 
             {/* Message */}
@@ -329,6 +435,62 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                 />
               </div>
             </div>
+
+            {/* Wedding Coverage Checklist */}
+            {formData.type === 'wedding' && (
+              <div className="col-span-1 md:col-span-2 space-y-4 pt-6 mt-2 border-t border-white/10">
+                <div>
+                  <label className="block text-[10px] uppercase tracking-[0.15em] font-semibold text-gold-200 font-sans">
+                    Wedding Day Coverage Checklist
+                  </label>
+                  <p className="text-[10px] text-white/40 font-light font-mono mt-1">
+                    Select the key moments you would like your photographer to cover, sequentially from beginning to end of day.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {weddingCoveragePhases.map((phase) => (
+                    <div key={phase.phase} className="space-y-3 bg-white/[0.02] border border-white/5 p-4 rounded-sm">
+                      <h4 className="text-[10px] font-mono tracking-wider text-white/80 uppercase pb-1.5 border-b border-white/10">
+                        {phase.phase}
+                      </h4>
+                      <div className="space-y-2">
+                        {phase.items.map((item) => {
+                          const isChecked = selectedCoverage.includes(item.id);
+                          return (
+                            <label
+                              key={item.id}
+                              className={`flex items-start space-x-2.5 text-xs font-sans cursor-pointer group select-none py-1.5 px-2 rounded-sm transition-all duration-200 ${
+                                isChecked 
+                                  ? 'bg-gold-200/5 text-gold-200 border border-gold-200/10' 
+                                  : 'text-white/60 hover:text-white hover:bg-white/[0.02] border border-transparent'
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={() => handleCoverageToggle(item.id)}
+                                className="sr-only"
+                              />
+                              <div
+                                className={`w-4 h-4 rounded-sm border flex items-center justify-center mt-0.5 transition-all duration-200 ${
+                                  isChecked
+                                    ? 'border-gold-200 bg-gold-200 text-[#0C0C0C]'
+                                    : 'border-white/20 group-hover:border-white/40 bg-transparent'
+                                }`}
+                              >
+                                {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                              </div>
+                              <span className="flex-1 text-[11px] leading-tight font-light">{item.label}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Submit button */}

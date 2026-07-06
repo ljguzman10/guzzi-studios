@@ -40,7 +40,7 @@ export default function Header({ currentView, onNavigate, onOpenAdmin }: HeaderP
     { id: 'weddings', label: 'Weddings' },
     { id: 'djs-artists', label: 'DJs & Artists' },
     { id: 'events', label: 'Events' },
-    { id: 'about', label: 'About Luis' },
+    { id: 'about', label: '-About Guzzi-' },
     { id: 'pricing', label: 'Pricing' },
     { id: 'contact', label: 'Inquire' },
   ];

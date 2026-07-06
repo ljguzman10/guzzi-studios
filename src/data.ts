@@ -22,7 +22,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: new URL('./assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href,
     year: '2024',
     featured: false,
-    tags: ['Industrial Chic', 'Traditional', 'Candid']
+    tags: ['Churches', 'Traditional', 'Candid']
   },
   {
     id: 'w3',
@@ -55,7 +55,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: new URL('./assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href,
     year: '2024',
     featured: false,
-    tags: ['Anniversary', 'Views', 'Golden Hour']
+    tags: ['Anniversary', 'Views', 'GoldenHour']
   },
   {
     id: 'w4',
@@ -66,7 +66,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: new URL('./assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href,
     year: '2025',
     featured: false,
-    tags: ['Vintage', 'Urban', 'UpAbove']
+    tags: ['Engagement', 'Urban', 'UpAbove']
   },
 
   // Events
