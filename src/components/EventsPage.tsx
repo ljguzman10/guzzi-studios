@@ -45,10 +45,17 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
         };
       }
       if (item.id === 'e3') {
-        return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', badge: 'HEADLINER: @FOURCOLORZACK', badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD'], tags: ['PoliticalParty', 'Gala', 'WarehouseVibes'] };
+        return { ...item, title: 'Joes On Weed St.', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', badge: 'HEADLINER: @FOURCOLORZACK', badges: ['HEADLINER: @FOURCOLORZACK', 'OPENER: @DJ_QUAD'], tags: ['PoliticalParty', 'Gala', 'WarehouseVibes'] };
       }
       if (item.id === 'e4') {
-        return { ...item, title: 'Regency Inn Banquets', subtitle: "Paola's 70th Birthday Party", tags: ['Celebration', '70AndGolden', 'Atmosphere'] };
+        const defaultItem = defaultPortfolioItems.find(d => d.id === 'e4');
+        return { 
+          ...item, 
+          title: 'Regency Inn Banquets', 
+          subtitle: "Paola's 70th Birthday Party", 
+          tags: ['Celebration', '70AndGolden', 'Atmosphere'],
+          image: defaultItem?.image || item.image
+        };
       }
       return item;
     });

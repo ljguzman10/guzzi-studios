@@ -6,6 +6,7 @@ import prysmImg from './assets/images/regenerated_image_1783364630944.jpg';
 import celestImg from './assets/images/club_crowd_lasers_1782855555903.jpg';
 import redlineImg from './assets/images/regenerated_image_1783367220371.jpg';
 import kashmirImg from './assets/images/regenerated_image_1783368986162.jpg';
+import regencyInnImg from './assets/images/regenerated_image_1784163892114.jpg';
 
 export const portfolioItems: PortfolioItem[] = [
   // Weddings
@@ -102,7 +103,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: 'e3',
     category: 'events',
-    title: 'Joes On Weed St.: DNC Party',
+    title: 'Joes On Weed St.',
     subtitle: 'Official Democratic National Committee After Party',
     location: 'GOOSE ISLAND, CHICAGO',
     image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200',
@@ -118,7 +119,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: 'Regency Inn Banquets',
     subtitle: "Paola's 70th Birthday Party",
     location: 'Chicago, IL',
-    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=1200',
+    image: regencyInnImg,
     year: '2025',
     featured: false,
     tags: ['Celebration', '70AndGolden', 'Atmosphere']
@@ -136,19 +137,6 @@ export const portfolioItems: PortfolioItem[] = [
     featured: true,
     tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'],
     badge: 'HEADLINER DJ: @NEIV.DJ'
-  },
-  {
-    id: 'd5',
-    category: 'djs-artists',
-    title: 'PRYSM',
-    subtitle: 'Lollapalooza Aftershow',
-    location: 'LINCOLN PARK, CHICAGO',
-    image: celestImg,
-    year: '2024',
-    featured: false,
-    tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'],
-    badge: 'HEADLINER DJ: @FORESTERMUSIC',
-    badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ']
   },
   {
     id: 'd3',
@@ -175,19 +163,6 @@ export const portfolioItems: PortfolioItem[] = [
     tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'],
     badge: 'HEADLINER: @GIANNIBLU',
     badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ']
-  },
-  {
-    id: 'd2',
-    category: 'djs-artists',
-    title: 'Chop Shop',
-    subtitle: 'Industrial Foundations Met With Unyielding Frequencies',
-    location: 'WICKER PARK, CHICAGO',
-    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200',
-    year: '2025',
-    featured: true,
-    tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'],
-    badge: 'HEADLINER: @TVVIN.OC',
-    badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ']
   },
   {
     id: 'd6',

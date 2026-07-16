@@ -76,6 +76,19 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
 
   const eventPackages = [
     {
+      name: "The Hourly Essence",
+      price: "$475",
+      description: "An agile, high-impact collection curated for rapid-fire events, press conferences, or ribbon cuttings.",
+      features: [
+        "3 Hours of Continuous Coverage",
+        "Online Gallery with High-Resolution Digital Downloads",
+        "100-150+ High Resolution Images",
+        "5 Hard Edited Photos",
+        "Sneak Peek Highlights within 24 Hours"
+      ],
+      tag: "Agile Coverage"
+    },
+    {
       name: "The Half-Day Elite",
       price: "$950",
       description: "Perfect for intimate gatherings, private dinings, or streamlined corporate panel sessions.",
@@ -236,7 +249,7 @@ export default function PricingPage({ onNavigate }: PricingPageProps) {
         </div>
 
         {/* Dynamic Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-20">
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${activePackages.length === 4 ? 'xl:grid-cols-4 lg:grid-cols-3' : 'lg:grid-cols-3'} gap-8 items-stretch mb-20`}>
           {activePackages.map((pkg, idx) => (
             <div
               key={idx}

@@ -25,13 +25,14 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
     } else {
       items = defaultPortfolioItems.filter(item => item.category === 'djs-artists');
     }
-    const updated = items.map(item => {
+    
+    // Filter out d5 and d2 as requested for deletion
+    const filteredItems = items.filter(item => item.id !== 'd5' && item.id !== 'd2');
+
+    const updated = filteredItems.map(item => {
       const defaultItem = defaultPortfolioItems.find(d => d.id === item.id);
       if (item.id === 'd1') {
         return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'], image: prysmImg };
-      }
-      if (item.id === 'd5') {
-        return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'], image: celestImg };
       }
       if (item.id === 'd3') {
         return { 
@@ -48,25 +49,13 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
       if (item.id === 'd4') {
         return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'], image: kashmirImg };
       }
-      if (item.id === 'd2') {
-        return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
-      }
       if (item.id === 'd6') {
         return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'], image: redlineImg };
       }
       return item;
     });
 
-    // Swap positions of d1 and d5 to respect layout changes requested by user (ensure d5 is before d1)
-    const d1Idx = updated.findIndex(item => item.id === 'd1');
-    const d5Idx = updated.findIndex(item => item.id === 'd5');
-    if (d1Idx !== -1 && d5Idx !== -1) {
-      const temp = updated[d1Idx];
-      updated[d1Idx] = updated[d5Idx];
-      updated[d5Idx] = temp;
-    }
-
-    // Swap positions of d1 and d3 (the 2nd and 3rd elements in the current layout list)
+    // Swap positions of d1 and d3 (to respect layout preference)
     const d1NewIdx = updated.findIndex(item => item.id === 'd1');
     const d3Idx = updated.findIndex(item => item.id === 'd3');
     if (d1NewIdx !== -1 && d3Idx !== -1) {
@@ -129,11 +118,11 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
         </div>
 
         {/* Cinematic Magazine Layout List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8">
           {djItems.map((item) => (
             <div
               key={item.id}
-              className="group border border-white/10 bg-[#111111]/30 p-4 hover:bg-[#111111]/80 hover:border-white/20 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between rounded-sm"
+              className="group border border-white/10 bg-[#111111]/30 p-5 hover:bg-[#111111]/80 hover:border-white/20 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between rounded-sm"
             >
               <div className="space-y-4">
                 <div className="aspect-[4/3] w-full overflow-hidden bg-zinc-950 rounded-sm relative">
@@ -144,46 +133,45 @@ export default function DjsArtistsPage({ onNavigate }: DjsArtistsPageProps) {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition-colors" />
-                  <div className="absolute bottom-3 left-3 flex flex-col gap-1 items-start">
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 w-max max-w-[90%]">
                     {item.badges && item.badges.length > 0 ? (
                       item.badges.map((b, bIdx) => (
                         <div
                           key={bIdx}
-                          className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase"
+                          className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase text-center"
                         >
                           {b}
                         </div>
                       ))
                     ) : (
-                      <div className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase">
+                      <div className="bg-black/80 backdrop-blur-sm text-[8px] text-white/80 font-mono tracking-widest px-2.5 py-0.5 uppercase text-center">
                         {item.badge || 'Artist Doc'}
                       </div>
                     )}
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-[9px] text-white/50 font-mono uppercase tracking-wider">
-                    <span className="flex items-center">
-                      <MapPin className="w-3 h-3 mr-1 text-white/40" />
-                      {item.location}
-                    </span>
-                  </div>
-
+                <div className="space-y-2 text-center">
                   <h3 className="font-serif text-lg md:text-xl text-white font-light group-hover:text-white/80 transition-colors tracking-wide leading-tight">
                     {item.title}
                   </h3>
                   {item.subtitle && (
                     <p className="text-white/50 text-xs italic font-sans font-light">
-                      {item.subtitle.startsWith('Featuring') || item.id === 'd1' || item.id === 'd3' || item.id === 'd5' || item.id === 'd4' ? item.subtitle : `Featuring ${item.subtitle}`}
+                      {item.subtitle.startsWith('Featuring') || item.id === 'd1' || item.id === 'd3' || item.id === 'd4' ? item.subtitle : `Featuring ${item.subtitle}`}
                     </p>
                   )}
+                  <div className="flex items-center justify-center text-[9px] text-white/40 font-mono uppercase tracking-wider pt-1">
+                    <span className="flex items-center">
+                      <MapPin className="w-3 h-3 mr-1 text-white/30" />
+                      {item.location}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Tags & Actions */}
-              <div className="border-t border-white/10 pt-4 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex flex-wrap gap-1">
+              <div className="border-t border-white/10 pt-4 mt-6 flex flex-col items-center justify-center gap-4 text-center">
+                <div className="flex flex-wrap justify-center gap-1">
                   {item.tags?.map((tag, tIdx) => (
                     <span
                       key={tIdx}

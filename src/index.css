@@ -70,3 +70,33 @@
 .markdown-body p {
   margin-bottom: 1em;
 }
+
+/* Date Input Styling & Layout Normalization */
+input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent Chrome/Safari/Edge date input inner elements from stretching the layout */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+/* Clean up and style the native calendar indicator button so it doesn't stretch and looks sleek */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1) opacity(0.4);
+  margin: 0;
+  padding: 2px;
+  transition: opacity 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(1) opacity(0.8);
+}
+

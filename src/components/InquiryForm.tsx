@@ -317,7 +317,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                   value={formData.date}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all"
+                  className="w-full max-w-full min-w-0 appearance-none pl-10 pr-4 py-3 bg-white/5 border border-white/10 focus:border-white/30 focus:ring-0 text-xs text-white font-sans outline-none rounded-sm transition-all"
                 />
               </div>
             </div>
@@ -405,9 +405,6 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                 <input
                   type="number"
                   name="budget"
-                  min="100"
-                  max="100000"
-                  step="500"
                   value={formData.budget}
                   onChange={handleChange}
                   placeholder="Enter your custom budget (e.g. 5000)"
@@ -416,7 +413,7 @@ export default function InquiryForm({ onSuccessSubmit, defaultType = 'wedding' }
                 />
               </div>
               <p className="text-[10px] text-white/40 font-light font-mono">
-                Please specify an amount within our service range of $100 to $100,000.
+                Please specify your estimated budget.
               </p>
             </div>
 

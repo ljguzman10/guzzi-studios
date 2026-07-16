@@ -10,6 +10,7 @@ import celestImg from '../assets/images/club_crowd_lasers_1782855555903.jpg';
 import redlineImg from '../assets/images/regenerated_image_1783367220371.jpg';
 import kashmirImg from '../assets/images/regenerated_image_1783368986162.jpg';
 import djCloseupHands from '../assets/images/dj_pioneer_two_hands_centered_1782758087409.jpg';
+import regencyInnImg from '../assets/images/regenerated_image_1784163892114.jpg';
 
 interface PortfolioCategoriesProps {
   onNavigate: (view: string) => void;
@@ -18,150 +19,140 @@ interface PortfolioCategoriesProps {
 
 const showcasePhotos = [
   {
-    id: 'm1',
+    id: 'w1',
     category: 'weddings',
     title: 'Cantigny Park',
     subtitle: 'Beth & Trevor',
     location: 'Wheaton, IL',
     image: new URL('../assets/images/regenerated_image_1782436761072.jpg', import.meta.url).href,
-    year: '2025',
     tags: ['EditorialLove', 'LuxeFlora', 'Historic']
   },
   {
-    id: 'm2',
+    id: 'w2',
     category: 'weddings',
     title: 'Estate Wedding',
     subtitle: 'Tessa & Douglas',
     location: 'Chicago, IL',
     image: new URL('../assets/images/regenerated_image_1782504926122.jpg', import.meta.url).href,
-    year: '2024',
     tags: ['Cinematic', 'Outdoor', 'Emotional']
   },
   {
-    id: 'm3',
+    id: 'w3',
     category: 'weddings',
     title: 'Navy Pier',
     subtitle: 'Steven & Steven',
     location: 'Chicago, IL',
     image: new URL('../assets/images/regenerated_image_1782511010199.jpg', import.meta.url).href,
-    year: '2025',
     tags: ['AnchoredAtThePier', 'SparksFly', 'BoatCeremony']
   },
   {
-    id: 'm11',
+    id: 'w6',
     category: 'weddings',
     title: 'Saint Mary of The Angels Church',
     subtitle: 'Guadalupe & Andy',
     location: 'Chicago, IL',
     image: new URL('../assets/images/regenerated_image_1782519856684.jpg', import.meta.url).href,
-    year: '2024',
     tags: ['Industrial Chic', 'Traditional', 'Candid']
   },
   {
-    id: 'm5',
+    id: 'w5',
     category: 'weddings',
     title: 'Bar Avec Anniversary',
     subtitle: 'Katherine & Cliff',
     location: 'Chicago, IL',
     image: new URL('../assets/images/regenerated_image_1782523040836.jpg', import.meta.url).href,
-    year: '2024',
     tags: ['Romantic', 'Candid', 'Golden Hour']
   },
   {
-    id: 'm4',
+    id: 'w4',
     category: 'weddings',
     title: 'Mag Mile Engagement Party',
     subtitle: 'Makaela & Diego',
     location: 'Chicago, IL',
     image: new URL('../assets/images/regenerated_image_1782516236476.jpg', import.meta.url).href,
-    year: '2025',
     tags: ['Vintage', 'Urban', 'Black Tie']
   },
   {
-    id: 'm6',
+    id: 'e1',
     category: 'events',
     title: 'Penthouse NYE Party',
-    subtitle: 'Faceted Light & Shadows',
+    subtitle: "Hosted by Social Hunt Club with Big Local DJ's",
     location: 'Chicago, IL',
     image: chicagoRooftopParty,
-    year: '2025',
-    tags: ['Gala', 'Luxury Corporate', 'Cultural']
+    tags: ['PenthouseNYE', 'MidnightChicago', 'Tradition']
   },
   {
-    id: 'm7',
+    id: 'e2',
     category: 'events',
     title: 'Quinceañera',
     subtitle: 'Where heritage meets the urban skyline',
     location: 'LINCOLN PARK, CHICAGO',
     image: quinceaneraImg,
-    year: '2025',
     tags: ['TheGrandDebut', 'Fashion', 'SatinInTheSaddle']
   },
   {
-    id: 'm8',
+    id: 'e3',
+    category: 'events',
+    title: 'Joes On Weed St.',
+    subtitle: 'Official Democratic National Committee After Party',
+    location: 'GOOSE ISLAND, CHICAGO',
+    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200',
+    tags: ['PoliticalParty', 'Gala', 'WarehouseVibes']
+  },
+  {
+    id: 'e4',
+    category: 'events',
+    title: 'Regency Inn Banquets',
+    subtitle: "Paola's 70th Birthday Party",
+    location: 'Chicago, IL',
+    image: regencyInnImg,
+    tags: ['Celebration', '70AndGolden', 'Atmosphere']
+  },
+  {
+    id: 'd1',
     category: 'djs-artists',
     title: 'Celest',
     subtitle: "International Woman's Day",
     location: 'RIVER NORTH, CHICAGO',
     image: prysmImg,
-    year: '2025',
     tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever']
   },
   {
-    id: 'm9',
-    category: 'djs-artists',
-    title: 'Chop Shop',
-    subtitle: 'Industrial Foundations Met With Unyielding Frequencies',
-    location: 'WICKER PARK, CHICAGO',
-    image: djCloseupHands,
-    year: '2025',
-    tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit']
-  },
-  {
-    id: 'm10',
-    category: 'djs-artists',
-    title: 'PRYSM',
-    subtitle: 'Lollapalooza Aftershow',
-    location: 'LINCOLN PARK, CHICAGO',
-    image: celestImg,
-    year: '2024',
-    tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura']
-  },
-  {
-    id: 'm12',
-    category: 'djs-artists',
-    title: 'Redline Chicago',
-    subtitle: 'Featuring Deep Underground Techno Afterhours Session',
-    location: 'WEST LOOP, CHICAGO',
-    image: redlineImg,
-    year: '2024',
-    tags: ['AfterHours', 'Underground', 'Lasers']
-  },
-  {
-    id: 'm13',
-    category: 'djs-artists',
-    title: 'Kashmir',
-    subtitle: 'Subversive rhythms wrapped in green onyx and velvet',
-    location: 'FULTON MARKET, CHICAGO',
-    image: kashmirImg,
-    year: '2025',
-    tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies']
-  },
-  {
-    id: 'm14',
+    id: 'd3',
     category: 'djs-artists',
     title: 'Crash Site : Music Video BTS',
     subtitle: "Hosted by the owners of Harold's Chicken",
     location: 'CRETE, IL',
     image: crashSiteImg,
-    year: '2024',
     tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses']
+  },
+  {
+    id: 'd4',
+    category: 'djs-artists',
+    title: 'Kashmir',
+    subtitle: 'Subversive rhythms wrapped in green onyx and velvet',
+    location: 'FULTON MARKET, CHICAGO',
+    image: kashmirImg,
+    tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies']
+  },
+  {
+    id: 'd6',
+    category: 'djs-artists',
+    title: 'Redline Chicago',
+    subtitle: 'Featuring Deep Underground Techno Afterhours Session',
+    location: 'WEST LOOP, CHICAGO',
+    image: redlineImg,
+    tags: ['AfterHours', 'Underground', 'Lasers']
   }
 ];
 
-export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesProps) {
+export default function PortfolioCategories({ onNavigate, portfolioItems }: PortfolioCategoriesProps) {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const activePhotos = portfolioItems && portfolioItems.length > 0
+    ? portfolioItems.filter(item => item.id !== 'd5' && item.id !== 'd2')
+    : showcasePhotos;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
@@ -251,14 +242,14 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
   const handlePrevLightbox = () => {
     setLightboxIndex((prev) => {
       if (prev === null) return null;
-      return prev === 0 ? showcasePhotos.length - 1 : prev - 1;
+      return prev === 0 ? activePhotos.length - 1 : prev - 1;
     });
   };
 
   const handleNextLightbox = () => {
     setLightboxIndex((prev) => {
       if (prev === null) return null;
-      return prev === showcasePhotos.length - 1 ? 0 : prev + 1;
+      return prev === activePhotos.length - 1 ? 0 : prev + 1;
     });
   };
 
@@ -365,11 +356,11 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
           onTouchCancel={() => { isTouchingRef.current = false; }}
           className="flex overflow-x-auto scrollbar-none gap-6 md:gap-8 px-6 md:px-12 select-none cursor-grab active:cursor-grabbing pb-2"
         >
-          {/* Direct list: Loop showcasePhotos 3 times for a flawless infinite scroll experience */}
-          {[...showcasePhotos, ...showcasePhotos, ...showcasePhotos].map((item, index) => (
+          {/* Direct list: Loop activePhotos 3 times for a flawless infinite scroll experience */}
+          {[...activePhotos, ...activePhotos, ...activePhotos].map((item, index) => (
             <div
               key={`r1-${item.id}-${index}`}
-              onClick={() => setLightboxIndex(showcasePhotos.findIndex(p => p.id === item.id))}
+              onClick={() => setLightboxIndex(activePhotos.findIndex(p => p.id === item.id))}
               className="w-[320px] sm:w-[460px] aspect-[4/3] relative overflow-hidden rounded-sm border border-white/10 group cursor-pointer flex-shrink-0 transition-transform duration-500 hover:border-white/30"
             >
               <img
@@ -389,8 +380,6 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
                 <div className="flex items-center space-x-1.5 text-white/50 text-[8px] font-mono tracking-widest uppercase mb-1">
                   <MapPin className="w-3 h-3 text-white/40" />
                   <span>{item.location}</span>
-                  <span>•</span>
-                  <span>{item.year}</span>
                 </div>
                 <h4 className="font-serif text-sm sm:text-base text-white tracking-wide truncate">
                   {item.title}
@@ -418,7 +407,7 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
                 Guzzi Masterpiece Portfolio
               </span>
               <p className="text-xs text-white/30 font-mono mt-0.5">
-                Image {lightboxIndex + 1} of {showcasePhotos.length}
+                Image {lightboxIndex + 1} of {activePhotos.length}
               </p>
             </div>
             
@@ -446,8 +435,8 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
             {/* Immersive high resolution photo card */}
             <div className="flex-grow h-full max-h-[60vh] sm:max-h-[70vh] flex items-center justify-center overflow-hidden px-2">
               <img
-                src={showcasePhotos[lightboxIndex].image}
-                alt={showcasePhotos[lightboxIndex].title}
+                src={activePhotos[lightboxIndex].image}
+                alt={activePhotos[lightboxIndex].title}
                 className="max-w-full max-h-full object-contain rounded-sm border border-white/10 shadow-2xl select-text"
               />
             </div>
@@ -466,24 +455,22 @@ export default function PortfolioCategories({ onNavigate }: PortfolioCategoriesP
           <div className="max-w-4xl mx-auto w-full text-center space-y-4 pb-6">
             <div className="flex items-center justify-center space-x-1.5 text-white/50 text-xs font-mono tracking-widest uppercase">
               <MapPin className="w-4 h-4 text-white/40" />
-              <span>{showcasePhotos[lightboxIndex].location}</span>
-              <span>•</span>
-              <span>{showcasePhotos[lightboxIndex].year}</span>
+              <span>{activePhotos[lightboxIndex].location}</span>
             </div>
             
             <h3 className="font-serif text-2xl sm:text-3xl text-white tracking-wide font-light">
-              {showcasePhotos[lightboxIndex].title}
+              {activePhotos[lightboxIndex].title}
             </h3>
             
-            {showcasePhotos[lightboxIndex].subtitle && (
+            {activePhotos[lightboxIndex].subtitle && (
               <p className="text-white/50 text-xs sm:text-sm font-sans font-light italic">
-                {showcasePhotos[lightboxIndex].subtitle}
+                {activePhotos[lightboxIndex].subtitle}
               </p>
             )}
 
             {/* Tag Badges */}
             <div className="flex flex-wrap justify-center gap-2 pt-1">
-              {showcasePhotos[lightboxIndex].tags.map((tag, tIdx) => (
+              {activePhotos[lightboxIndex].tags && activePhotos[lightboxIndex].tags.map((tag, tIdx) => (
                 <span
                   key={tIdx}
                   className="px-2.5 py-1 bg-white/5 border border-white/10 text-[10px] text-white/60 font-mono tracking-wide rounded-sm"

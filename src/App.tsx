@@ -36,8 +36,11 @@ export default function App() {
     if (storedPortfolio) {
       const parsed = JSON.parse(storedPortfolio) as PortfolioItem[];
       
+      // Filter out deleted portfolio items (d5 and d2)
+      const parsedFiltered = parsed.filter(item => item.id !== 'd5' && item.id !== 'd2');
+      
       // Ensure all default items exist in parsed list
-      let merged = [...parsed];
+      let merged = [...parsedFiltered];
       defaultPortfolioItems.forEach(defaultItem => {
         if (!merged.some(item => item.id === defaultItem.id)) {
           merged.push(defaultItem);
@@ -67,17 +70,11 @@ export default function App() {
         if (item.id === 'd1') {
           return { ...item, title: 'Celest', badge: 'HEADLINER DJ: @NEIV.DJ', subtitle: "International Woman's Day", location: 'RIVER NORTH, CHICAGO', tags: ['GirlsToTheFront', 'CelesteAfterDark', 'FlashFever'], image: new URL('./assets/images/regenerated_image_1783364630944.jpg', import.meta.url).href };
         }
-        if (item.id === 'd5') {
-          return { ...item, title: 'PRYSM', subtitle: 'Lollapalooza Aftershow', location: 'LINCOLN PARK, CHICAGO', tags: ['LollaAfterParty', 'NeonAndNuance', 'AmplifiedAura'], badge: 'HEADLINER DJ: @FORESTERMUSIC', badges: ['HEADLINER DJ: @FORESTERMUSIC', 'OPENER: @NEIV.DJ'], image: new URL('./assets/images/club_crowd_lasers_1782855555903.jpg', import.meta.url).href };
-        }
         if (item.id === 'd3') {
           return { ...item, title: 'Crash Site : Music Video BTS', subtitle: "Hosted by the owners of Harold's Chicken", location: 'CRETE, IL', badge: 'RAPPER: @BOOMANFOREVER', badges: ['RAPPER: @BOOMANFOREVER', 'Production: @TranceProductions', 'Host: @CowboyTip'], tags: ['TransProductionsBTS', 'CosmicCowboy', 'MildSauceMuses'], image: new URL('./assets/images/crash_site_bts_1783370119061.jpg', import.meta.url).href };
         }
         if (item.id === 'd4') {
           return { ...item, title: 'Kashmir', subtitle: 'Subversive rhythms wrapped in green onyx and velvet', location: 'FULTON MARKET, CHICAGO', badge: 'HEADLINER: @GIANNIBLU', badges: ['HEADLINER: @GIANNIBLU', 'OPENER: NEIV.DJ'], tags: ['DecadenceOnDecks', 'OnyxAndAudio', 'FultonMarketFrequencies'], image: new URL('./assets/images/regenerated_image_1783368986162.jpg', import.meta.url).href };
-        }
-        if (item.id === 'd2') {
-          return { ...item, title: 'Chop Shop', subtitle: 'Industrial Foundations Met With Unyielding Frequencies', location: 'WICKER PARK, CHICAGO', badge: 'HEADLINER: @TVVIN.OC', badges: ['HEADLINER: @TVVIN.OC', 'OPENERS: @ALLIEVERBEKE & @NEIV.DJ'], tags: ['StrobesAndSteel', 'LowLightLoudRooms', 'GridAndGrit'] };
         }
         if (item.id === 'd6') {
           return { ...item, title: 'Redline Chicago', subtitle: 'Featuring Deep Underground Techno Afterhours Session', location: 'WEST LOOP, CHICAGO', year: '2024', tags: ['AfterHours', 'Underground', 'Lasers'], badge: 'HEADLINERS: @_HHUNTER_ & @KULAAAA', badges: ['HEADLINERS: @_HHUNTER_ & @KULAAAA'], image: new URL('./assets/images/regenerated_image_1783367220371.jpg', import.meta.url).href };
@@ -89,22 +86,20 @@ export default function App() {
           return { ...item, title: 'Quinceañera', subtitle: "Where heritage meets the urban skyline", location: 'LINCOLN PARK, CHICAGO', tags: ['TheGrandDebut', 'Tradition', 'SatinInTheSaddle'], image: defaultItem?.image || item.image };
         }
         if (item.id === 'e3') {
-          return { ...item, title: 'Joes On Weed St.: DNC Party', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', tags: ['PoliticalParty', 'Gala', 'MidnightChicago'] };
+          return { ...item, title: 'Joes On Weed St.', subtitle: 'Official Democratic National Committee After Party', location: 'GOOSE ISLAND, CHICAGO', tags: ['PoliticalParty', 'Gala', 'MidnightChicago'] };
         }
         if (item.id === 'e4') {
-          return { ...item, title: 'Regency Inn Banquets', subtitle: "Paola's 70th Birthday Party", tags: ['Celebration', '70AndGolden', 'Atmosphere'] };
+          const defaultItem = defaultPortfolioItems.find(d => d.id === 'e4');
+          return { 
+            ...item, 
+            title: 'Regency Inn Banquets', 
+            subtitle: "Paola's 70th Birthday Party", 
+            tags: ['Celebration', '70AndGolden', 'Atmosphere'],
+            image: defaultItem?.image || item.image
+          };
         }
         return item;
       });
-
-      // Swap positions of d1 and d5 to respect layout changes requested by user (ensure d5 is before d1)
-      const d1Index = updated.findIndex(item => item.id === 'd1');
-      const d5Index = updated.findIndex(item => item.id === 'd5');
-      if (d1Index !== -1 && d5Index !== -1) {
-        const temp = updated[d1Index];
-        updated[d1Index] = updated[d5Index];
-        updated[d5Index] = temp;
-      }
 
       // Swap positions of d1 and d3 (the 2nd and 3rd elements in the current layout list)
       const d1NewIndex = updated.findIndex(item => item.id === 'd1');
@@ -181,6 +176,11 @@ export default function App() {
       localStorage.removeItem('admin_token');
     }
   }, []);
+
+  // Automatically scroll to the top of the page whenever the active view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
 
   // Handle a refresh from Admin Panel CMS updates
   const handleRefreshData = () => {
